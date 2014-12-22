@@ -1,20 +1,21 @@
 from ply import *
 
 tokens = (
-    'H1','H2','H3', 'CR', 'TEXT'
+    'H1','H2','H3', 'CR', 'WORD','BLANK'
     )
 
 # Tokens
 t_H1 = r'\# '
 t_H2 = r'\#\# '
 t_H3 = r'\#\#\# '
+t_BLANK = r'[\ ]+'
 
-def t_TEXT(t):
+def t_WORD(t):
     r'[_a-zA-Z0-9]+'
     t.value = str(t.value)
     return t
 
-t_ignore = " \t"
+t_ignore = "\t"
 
 def t_CR(t):
     r'\n+'

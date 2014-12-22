@@ -35,4 +35,5 @@ if __name__ == '__main__':
 		if sys.argv[1] == '-lex':
 			mklex_run(sys.argv[2])
 		elif sys.argv[1] == '-run':
+			#print open(sys.argv[2]).read()
 			yacc.parse(open(sys.argv[2]).read())
