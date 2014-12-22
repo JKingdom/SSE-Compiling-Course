@@ -1,0 +1,330 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> body
+Rule 1     body -> statement
+Rule 2     statement -> expression
+Rule 3     statement -> statement CR expression
+Rule 4     expression -> H1 factor
+Rule 5     expression -> H1 BLANK factor
+Rule 6     expression -> H2 factor
+Rule 7     expression -> H2 BLANK factor
+Rule 8     expression -> H3 factor
+Rule 9     expression -> H3 BLANK factor
+Rule 10    expression -> factor
+Rule 11    factor -> text
+Rule 12    text -> WORD
+Rule 13    text -> text BLANK text
+Rule 14    text -> WORD text
+
+Terminals, with rules where they appear
+
+BLANK                : 5 7 9 13
+CR                   : 3
+H1                   : 4 5
+H2                   : 6 7
+H3                   : 8 9
+WORD                 : 12 14
+error                : 
+
+Nonterminals, with rules where they appear
+
+body                 : 0
+expression           : 2 3
+factor               : 4 5 6 7 8 9 10
+statement            : 1 3
+text                 : 11 13 13 14
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . body
+    (1) body -> . statement
+    (2) statement -> . expression
+    (3) statement -> . statement CR expression
+    (4) expression -> . H1 factor
+    (5) expression -> . H1 BLANK factor
+    (6) expression -> . H2 factor
+    (7) expression -> . H2 BLANK factor
+    (8) expression -> . H3 factor
+    (9) expression -> . H3 BLANK factor
+    (10) expression -> . factor
+    (11) factor -> . text
+    (12) text -> . WORD
+    (13) text -> . text BLANK text
+    (14) text -> . WORD text
+
+    H1              shift and go to state 5
+    H2              shift and go to state 3
+    H3              shift and go to state 4
+    WORD            shift and go to state 2
+
+    body                           shift and go to state 1
+    text                           shift and go to state 6
+    expression                     shift and go to state 9
+    statement                      shift and go to state 7
+    factor                         shift and go to state 8
+
+state 1
+
+    (0) S' -> body .
+
+
+
+state 2
+
+    (12) text -> WORD .
+    (14) text -> WORD . text
+    (12) text -> . WORD
+    (13) text -> . text BLANK text
+    (14) text -> . WORD text
+
+    BLANK           reduce using rule 12 (text -> WORD .)
+    CR              reduce using rule 12 (text -> WORD .)
+    $end            reduce using rule 12 (text -> WORD .)
+    WORD            shift and go to state 2
+
+    text                           shift and go to state 10
+
+state 3
+
+    (6) expression -> H2 . factor
+    (7) expression -> H2 . BLANK factor
+    (11) factor -> . text
+    (12) text -> . WORD
+    (13) text -> . text BLANK text
+    (14) text -> . WORD text
+
+    BLANK           shift and go to state 11
+    WORD            shift and go to state 2
+
+    text                           shift and go to state 6
+    factor                         shift and go to state 12
+
+state 4
+
+    (8) expression -> H3 . factor
+    (9) expression -> H3 . BLANK factor
+    (11) factor -> . text
+    (12) text -> . WORD
+    (13) text -> . text BLANK text
+    (14) text -> . WORD text
+
+    BLANK           shift and go to state 13
+    WORD            shift and go to state 2
+
+    text                           shift and go to state 6
+    factor                         shift and go to state 14
+
+state 5
+
+    (4) expression -> H1 . factor
+    (5) expression -> H1 . BLANK factor
+    (11) factor -> . text
+    (12) text -> . WORD
+    (13) text -> . text BLANK text
+    (14) text -> . WORD text
+
+    BLANK           shift and go to state 15
+    WORD            shift and go to state 2
+
+    text                           shift and go to state 6
+    factor                         shift and go to state 16
+
+state 6
+
+    (11) factor -> text .
+    (13) text -> text . BLANK text
+
+    CR              reduce using rule 11 (factor -> text .)
+    $end            reduce using rule 11 (factor -> text .)
+    BLANK           shift and go to state 17
+
+
+state 7
+
+    (1) body -> statement .
+    (3) statement -> statement . CR expression
+
+    $end            reduce using rule 1 (body -> statement .)
+    CR              shift and go to state 18
+
+
+state 8
+
+    (10) expression -> factor .
+
+    CR              reduce using rule 10 (expression -> factor .)
+    $end            reduce using rule 10 (expression -> factor .)
+
+
+state 9
+
+    (2) statement -> expression .
+
+    CR              reduce using rule 2 (statement -> expression .)
+    $end            reduce using rule 2 (statement -> expression .)
+
+
+state 10
+
+    (14) text -> WORD text .
+    (13) text -> text . BLANK text
+
+  ! shift/reduce conflict for BLANK resolved as shift
+    CR              reduce using rule 14 (text -> WORD text .)
+    $end            reduce using rule 14 (text -> WORD text .)
+    BLANK           shift and go to state 17
+
+  ! BLANK           [ reduce using rule 14 (text -> WORD text .) ]
+
+
+state 11
+
+    (7) expression -> H2 BLANK . factor
+    (11) factor -> . text
+    (12) text -> . WORD
+    (13) text -> . text BLANK text
+    (14) text -> . WORD text
+
+    WORD            shift and go to state 2
+
+    text                           shift and go to state 6
+    factor                         shift and go to state 19
+
+state 12
+
+    (6) expression -> H2 factor .
+
+    CR              reduce using rule 6 (expression -> H2 factor .)
+    $end            reduce using rule 6 (expression -> H2 factor .)
+
+
+state 13
+
+    (9) expression -> H3 BLANK . factor
+    (11) factor -> . text
+    (12) text -> . WORD
+    (13) text -> . text BLANK text
+    (14) text -> . WORD text
+
+    WORD            shift and go to state 2
+
+    text                           shift and go to state 6
+    factor                         shift and go to state 20
+
+state 14
+
+    (8) expression -> H3 factor .
+
+    CR              reduce using rule 8 (expression -> H3 factor .)
+    $end            reduce using rule 8 (expression -> H3 factor .)
+
+
+state 15
+
+    (5) expression -> H1 BLANK . factor
+    (11) factor -> . text
+    (12) text -> . WORD
+    (13) text -> . text BLANK text
+    (14) text -> . WORD text
+
+    WORD            shift and go to state 2
+
+    text                           shift and go to state 6
+    factor                         shift and go to state 21
+
+state 16
+
+    (4) expression -> H1 factor .
+
+    CR              reduce using rule 4 (expression -> H1 factor .)
+    $end            reduce using rule 4 (expression -> H1 factor .)
+
+
+state 17
+
+    (13) text -> text BLANK . text
+    (12) text -> . WORD
+    (13) text -> . text BLANK text
+    (14) text -> . WORD text
+
+    WORD            shift and go to state 2
+
+    text                           shift and go to state 22
+
+state 18
+
+    (3) statement -> statement CR . expression
+    (4) expression -> . H1 factor
+    (5) expression -> . H1 BLANK factor
+    (6) expression -> . H2 factor
+    (7) expression -> . H2 BLANK factor
+    (8) expression -> . H3 factor
+    (9) expression -> . H3 BLANK factor
+    (10) expression -> . factor
+    (11) factor -> . text
+    (12) text -> . WORD
+    (13) text -> . text BLANK text
+    (14) text -> . WORD text
+
+    H1              shift and go to state 5
+    H2              shift and go to state 3
+    H3              shift and go to state 4
+    WORD            shift and go to state 2
+
+    text                           shift and go to state 6
+    expression                     shift and go to state 23
+    factor                         shift and go to state 8
+
+state 19
+
+    (7) expression -> H2 BLANK factor .
+
+    CR              reduce using rule 7 (expression -> H2 BLANK factor .)
+    $end            reduce using rule 7 (expression -> H2 BLANK factor .)
+
+
+state 20
+
+    (9) expression -> H3 BLANK factor .
+
+    CR              reduce using rule 9 (expression -> H3 BLANK factor .)
+    $end            reduce using rule 9 (expression -> H3 BLANK factor .)
+
+
+state 21
+
+    (5) expression -> H1 BLANK factor .
+
+    CR              reduce using rule 5 (expression -> H1 BLANK factor .)
+    $end            reduce using rule 5 (expression -> H1 BLANK factor .)
+
+
+state 22
+
+    (13) text -> text BLANK text .
+    (13) text -> text . BLANK text
+
+  ! shift/reduce conflict for BLANK resolved as shift
+    CR              reduce using rule 13 (text -> text BLANK text .)
+    $end            reduce using rule 13 (text -> text BLANK text .)
+    BLANK           shift and go to state 17
+
+  ! BLANK           [ reduce using rule 13 (text -> text BLANK text .) ]
+
+
+state 23
+
+    (3) statement -> statement CR expression .
+
+    CR              reduce using rule 3 (statement -> statement CR expression .)
+    $end            reduce using rule 3 (statement -> statement CR expression .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for BLANK in state 10 resolved as shift
+WARNING: shift/reduce conflict for BLANK in state 22 resolved as shift

@@ -22,17 +22,28 @@ def p_state(p):
         p[0] = str(p[1]) + '<br>' + str(p[3])
 
 def p_exp_cr_1(p):
-    '''expression : H1 factor'''
-    p[0] = '<h1>' + str(p[2]) + '</h1>'
+    '''expression : H1 factor
+        | H1 BLANK factor'''
+    if len(p)==3:
+        p[0] = '<h1>' + str(p[2]) + '</h1>'
+    else:
+        p[0] = '<h1>' + str(p[3]) + '</h1>'
 
 def p_exp_cr_2(p):
-    '''expression : H2 factor'''
-    p[0] = '<h2>' + str(p[2]) + '</h2>'
+    '''expression : H2 factor
+        | H2 BLANK factor'''
+    if len(p)==3:
+        p[0] = '<h2>' + str(p[2]) + '</h2>'
+    else:
+        p[0] = '<h2>' + str(p[3]) + '</h2>'
 
 def p_exp_cr3(p):
-    '''expression : H3 factor'''
-    p[0] = '<h3>' + str(p[2]) + '</h3>'
-
+    '''expression : H3 factor
+        | H3 BLANK factor'''
+    if len(p)==3:
+        p[0] = '<h3>' + str(p[2]) + '</h3>'
+    else:
+        p[0] = '<h3>' + str(p[3]) + '</h3>'
 
 def p_exp_cr(p):
     '''expression : factor'''
@@ -44,13 +55,15 @@ def p_factor_text(p):
 
 def p_text_word(p):
     '''text : WORD
-        | BLANK text
+        | text BLANK text
         | WORD text
         '''
     if len(p)==3:
         p[0] = p[1] + p[2]
-    else:
+    elif len(p)==2:
         p[0] = p[1]
+    else:
+        p[0] = p[1] + p[2] + p[3]
 
 def p_error(p):
     if p:
@@ -58,4 +71,4 @@ def p_error(p):
     else:
         print("error at EOF")
         
-yacc.yacc(debug=0)
+yacc.yacc(debug=1)

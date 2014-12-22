@@ -21,7 +21,7 @@ from mklex import *
 from mkyacc import *
 
 import ply.yacc as yacc
-yacc.yacc()
+yacc.yacc(debug=0)
 
 def is_file_exist(filename):
 	pass
