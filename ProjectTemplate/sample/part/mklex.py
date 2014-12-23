@@ -12,7 +12,7 @@ t_STAR = r'\*'
 t_DOUBLESTAR = r'\*\*'
 t_UL=r'\_'
 t_DUL=r'\_\_'
-t_SUB=r'[-]+'   ##正则表达的改变
+t_SUB=r'[-]+'
 t_EQL=r'[=]+'
 
 def t_TEXT(t):

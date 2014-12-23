@@ -5,9 +5,9 @@ _tabversion = '3.2'
 
 _lr_method = 'LALR'
 
-_lr_signature = '.\xa9\xfe\xfd\x10 \xe0\xf4z\xe7f;\x16\x8eB\xe4'
+_lr_signature = 'B\xfd\xed\x87!\x05\x94\xd5f`\x8f\x1d\x96\xb8@k'
     
-_lr_action_items = {'STAR':([0,3,5,6,7,9,10,11,12,14,15,16,22,23,25,26,27,28,29,30,31,32,33,],[2,-16,2,2,2,-10,-17,2,-9,2,26,-15,-18,2,-7,-11,-14,-5,-6,-4,-12,-13,-8,]),'SUB':([0,3,9,10,11,12,14,16,22,23,25,26,27,28,29,30,31,32,33,],[3,-16,-10,-17,3,-9,-2,-15,-18,-3,-7,-11,-14,-5,-6,-4,-12,-13,-8,]),'H2':([0,3,9,10,11,12,14,16,22,23,25,26,27,28,29,30,31,32,33,],[5,-16,-10,-17,5,-9,-2,-15,-18,-3,-7,-11,-14,-5,-6,-4,-12,-13,-8,]),'H3':([0,3,9,10,11,12,14,16,22,23,25,26,27,28,29,30,31,32,33,],[6,-16,-10,-17,6,-9,-2,-15,-18,-3,-7,-11,-14,-5,-6,-4,-12,-13,-8,]),'H1':([0,3,9,10,11,12,14,16,22,23,25,26,27,28,29,30,31,32,33,],[7,-16,-10,-17,7,-9,-2,-15,-18,-3,-7,-11,-14,-5,-6,-4,-12,-13,-8,]),'UL':([0,3,5,6,7,9,10,11,12,14,16,21,22,23,25,26,27,28,29,30,31,32,33,],[8,-16,8,8,8,-10,-17,8,-9,8,-15,31,-18,8,-7,-11,-14,-5,-6,-4,-12,-13,-8,]),'EQL':([0,3,9,10,11,12,14,16,22,23,25,26,27,28,29,30,31,32,33,],[10,-16,-10,-17,10,-9,-2,-15,-18,-3,-7,-11,-14,-5,-6,-4,-12,-13,-8,]),'TEXT':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,16,22,23,25,26,27,28,29,30,31,32,33,],[9,15,-16,17,9,9,9,21,-10,-17,9,-9,24,9,-15,-18,9,-7,-11,-14,-5,-6,-4,-12,-13,-8,]),'DOUBLESTAR':([0,3,5,6,7,9,10,11,12,14,16,22,23,24,25,26,27,28,29,30,31,32,33,],[13,-16,13,13,13,-10,-17,13,-9,13,-15,-18,13,32,-7,-11,-14,-5,-6,-4,-12,-13,-8,]),'DUL':([0,3,5,6,7,9,10,11,12,14,16,17,22,23,25,26,27,28,29,30,31,32,33,],[4,-16,4,4,4,-10,-17,4,-9,4,-15,27,-18,4,-7,-11,-14,-5,-6,-4,-12,-13,-8,]),'CR':([3,9,10,18,19,20,25,26,27,31,32,],[16,-10,22,28,29,30,33,-11,-14,-12,-13,]),'$end':([1,3,9,10,11,12,14,16,22,23,25,26,27,28,29,30,31,32,33,],[0,-16,-10,-17,-1,-9,-2,-15,-18,-3,-7,-11,-14,-5,-6,-4,-12,-13,-8,]),}
+_lr_action_items = {'STAR':([0,3,5,6,7,8,10,11,12,13,15,16,17,22,24,25,27,28,29,30,31,32,33,34,],[2,-17,2,2,2,2,-11,-19,2,-10,-2,27,-16,-8,-18,-3,-12,-15,-5,-6,-4,-9,-13,-14,]),'SUB':([0,3,8,10,11,12,13,15,17,22,24,25,27,28,29,30,31,32,33,34,],[3,-17,-7,-11,-19,3,-10,-2,-16,-8,-18,-3,-12,-15,-5,-6,-4,-9,-13,-14,]),'H2':([0,3,8,10,11,12,13,15,17,22,24,25,27,28,29,30,31,32,33,34,],[5,-17,-7,-11,-19,5,-10,-2,-16,-8,-18,-3,-12,-15,-5,-6,-4,-9,-13,-14,]),'H3':([0,3,8,10,11,12,13,15,17,22,24,25,27,28,29,30,31,32,33,34,],[6,-17,-7,-11,-19,6,-10,-2,-16,-8,-18,-3,-12,-15,-5,-6,-4,-9,-13,-14,]),'H1':([0,3,8,10,11,12,13,15,17,22,24,25,27,28,29,30,31,32,33,34,],[7,-17,-7,-11,-19,7,-10,-2,-16,-8,-18,-3,-12,-15,-5,-6,-4,-9,-13,-14,]),'UL':([0,3,5,6,7,8,10,11,12,13,15,17,22,23,24,25,27,28,29,30,31,32,33,34,],[9,-17,9,9,9,9,-11,-19,9,-10,-2,-16,-8,33,-18,-3,-12,-15,-5,-6,-4,-9,-13,-14,]),'EQL':([0,3,8,10,11,12,13,15,17,22,24,25,27,28,29,30,31,32,33,34,],[11,-17,-7,-11,-19,11,-10,-2,-16,-8,-18,-3,-12,-15,-5,-6,-4,-9,-13,-14,]),'TEXT':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,22,24,25,27,28,29,30,31,32,33,34,],[10,16,-17,18,10,10,10,10,23,-11,-19,10,-10,26,-2,-16,-8,-18,-3,-12,-15,-5,-6,-4,-9,-13,-14,]),'DOUBLESTAR':([0,3,5,6,7,8,10,11,12,13,15,17,22,24,25,26,27,28,29,30,31,32,33,34,],[14,-17,14,14,14,14,-11,-19,14,-10,-2,-16,-8,-18,-3,34,-12,-15,-5,-6,-4,-9,-13,-14,]),'DUL':([0,3,5,6,7,8,10,11,12,13,15,17,18,22,24,25,27,28,29,30,31,32,33,34,],[4,-17,4,4,4,4,-11,-19,4,-10,-2,-16,28,-8,-18,-3,-12,-15,-5,-6,-4,-9,-13,-14,]),'CR':([3,10,11,19,20,21,22,27,28,33,34,],[17,-11,24,29,30,31,32,-12,-15,-13,-14,]),'$end':([1,3,8,10,11,12,13,15,17,22,24,25,27,28,29,30,31,32,33,34,],[0,-17,-7,-11,-19,-1,-10,-2,-16,-8,-18,-3,-12,-15,-5,-6,-4,-9,-13,-14,]),}
 
 _lr_action = { }
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'body':([0,],[1,]),'expression':([0,11,],[14,23,]),'statement':([0,],[11,]),'factor':([0,5,6,7,11,14,23,],[12,18,19,20,12,25,25,]),}
+_lr_goto_items = {'body':([0,],[1,]),'lines':([0,12,],[8,8,]),'expression':([0,12,],[15,25,]),'statement':([0,],[12,]),'factor':([0,5,6,7,8,12,],[13,19,20,21,22,13,]),}
 
 _lr_goto = { }
 for _k, _v in _lr_goto_items.items():
@@ -26,22 +26,23 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> body","S'",1,None,None,None),
-  ('body -> statement','body',1,'p_body','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',13),
-  ('statement -> expression','statement',1,'p_state','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',17),
-  ('statement -> statement expression','statement',2,'p_state','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',18),
-  ('expression -> H1 factor CR','expression',3,'p_exp_cr_1','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',25),
-  ('expression -> H2 factor CR','expression',3,'p_exp_cr_2','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',29),
-  ('expression -> H3 factor CR','expression',3,'p_exp_cr3','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',33),
-  ('expression -> expression factor','expression',2,'p_exp_cr','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',37),
-  ('expression -> expression factor CR','expression',3,'p_exp_cr','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',38),
-  ('expression -> factor','expression',1,'p_exp_cr','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',39),
-  ('factor -> TEXT','factor',1,'p_factor_TEXT','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',48),
-  ('factor -> STAR TEXT STAR','factor',3,'p_emfactor_TEXT','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',56),
-  ('factor -> UL TEXT UL','factor',3,'p_emfactor_TEXT','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',57),
-  ('factor -> DOUBLESTAR TEXT DOUBLESTAR','factor',3,'p_strongfactor_TEXT','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',61),
-  ('factor -> DUL TEXT DUL','factor',3,'p_strongfactor_TEXT','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',62),
-  ('expression -> SUB CR','expression',2,'p_hr','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',67),
-  ('expression -> SUB','expression',1,'p_hr','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',68),
-  ('expression -> EQL','expression',1,'p_hr','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',69),
-  ('expression -> EQL CR','expression',2,'p_hr','E:\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',70),
+  ('body -> statement','body',1,'p_body','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',13),
+  ('statement -> expression','statement',1,'p_state','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',17),
+  ('statement -> statement expression','statement',2,'p_state','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',18),
+  ('expression -> H1 factor CR','expression',3,'p_exp_cr_1','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',25),
+  ('expression -> H2 factor CR','expression',3,'p_exp_cr_2','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',29),
+  ('expression -> H3 factor CR','expression',3,'p_exp_cr3','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',33),
+  ('expression -> lines','expression',1,'p_exp_cr','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',37),
+  ('lines -> lines factor','lines',2,'p_lines_factor','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',41),
+  ('lines -> lines factor CR','lines',3,'p_lines_factor','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',42),
+  ('lines -> factor','lines',1,'p_lines_factor','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',43),
+  ('factor -> TEXT','factor',1,'p_factor_TEXT','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',53),
+  ('factor -> STAR TEXT STAR','factor',3,'p_emfactor_TEXT','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',61),
+  ('factor -> UL TEXT UL','factor',3,'p_emfactor_TEXT','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',62),
+  ('factor -> DOUBLESTAR TEXT DOUBLESTAR','factor',3,'p_strongfactor_TEXT','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',66),
+  ('factor -> DUL TEXT DUL','factor',3,'p_strongfactor_TEXT','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',67),
+  ('expression -> SUB CR','expression',2,'p_hr','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',72),
+  ('expression -> SUB','expression',1,'p_hr','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',73),
+  ('expression -> EQL CR','expression',2,'p_hr','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',74),
+  ('expression -> EQL','expression',1,'p_hr','C:\\work\\work\\study\\\xb1\xe0\xd2\xeb\xd4\xad\xc0\xed_\xb8\xdf\xd5\xe4\\SSE-Compiling-Course\\ProjectTemplate\\sample\\part\\mkyacc.py',75),
 ]

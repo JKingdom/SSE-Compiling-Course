@@ -34,9 +34,14 @@ def p_exp_cr3(p):
     p[0] = '<h3>' + str(p[2]) + '</h3>'
 
 def p_exp_cr(p):
-    '''expression : expression factor 
-    |  expression factor CR
-    | factor'''
+    '''expression : lines'''
+    p[0] = '<p>' + p[1] + '<\p>'
+
+def p_lines_factor(p):
+    '''lines : lines factor
+        | lines factor CR
+        | factor
+    '''
     if(len(p) == 3):
         p[0] = p[1] + p[2]
     elif(len(p) == 4):
