@@ -14,56 +14,74 @@ def p_body(p):
     print '<body>' + p[1] + '</body>'
 
 def p_state(p):
-    '''statement : expression
-            | statement CR expression'''
+    '''statement :  expression 
+    | statement expression '''
     if (len(p)==2):
         p[0] = p[1]
-    elif (len(p) == 4):
-        p[0] = str(p[1]) + '<br>' + str(p[3])
+    else: 
+        p[0] = p[1] + p[2]
 
 def p_exp_cr_1(p):
-    '''expression : H1 factor
-        | H1 BLANK factor'''
-    if len(p)==3:
-        p[0] = '<h1>' + str(p[2]) + '</h1>'
-    else:
-        p[0] = '<h1>' + str(p[3]) + '</h1>'
+    '''expression : H1 factor CR'''
+    p[0] = '<h1>' + str(p[2]) + '</h1>'
 
 def p_exp_cr_2(p):
-    '''expression : H2 factor
-        | H2 BLANK factor'''
-    if len(p)==3:
-        p[0] = '<h2>' + str(p[2]) + '</h2>'
-    else:
-        p[0] = '<h2>' + str(p[3]) + '</h2>'
+    '''expression : H2 factor CR'''
+    p[0] = '<h2>' + str(p[2]) + '</h2>'
 
 def p_exp_cr3(p):
-    '''expression : H3 factor
-        | H3 BLANK factor'''
-    if len(p)==3:
-        p[0] = '<h3>' + str(p[2]) + '</h3>'
-    else:
-        p[0] = '<h3>' + str(p[3]) + '</h3>'
+    '''expression : H3 factor CR'''
+    p[0] = '<h3>' + str(p[2]) + '</h3>'
 
 def p_exp_cr(p):
-    '''expression : factor'''
-    p[0] = p[1]
-
-def p_factor_text(p):
-    "factor : text"
-    p[0] = p[1]
-
-def p_text_word(p):
-    '''text : WORD
-        | text BLANK text
-        | WORD text
-        '''
-    if len(p)==3:
+    '''expression : expression factor 
+    |  expression factor CR
+    | factor'''
+    if(len(p) == 3):
         p[0] = p[1] + p[2]
-    elif len(p)==2:
-        p[0] = p[1]
+    elif(len(p) == 4):
+        p[0] = p[1] + p[2] + ' '
     else:
-        p[0] = p[1] + p[2] + p[3]
+        p[0] = p[1]
+
+def p_factor_TEXT(p):
+    '''factor : TEXT'''
+    p[0] = p[1]
+
+#def p_factor_CR(p):
+#    "factor : CR"
+    #p[0] = '<br/>'
+
+def p_emfactor_TEXT(p):
+    '''factor : STAR TEXT STAR
+        | UL TEXT UL '''
+    p[0] = '<em>' + str(p[2]) + '</em>'
+
+def p_strongfactor_TEXT(p):
+    '''factor : DOUBLESTAR TEXT DOUBLESTAR
+        | DUL TEXT DUL '''
+    p[0] = '<strong>' + str(p[2]) + '</strong>'
+
+
+def p_hr(p):
+    '''expression : SUB CR
+        | SUB
+        | EQL CR
+        | EQL
+    '''
+    p[0] = '<hr/>'
+
+#def p_TEXT_word(p):
+#    '''TEXT : WORD
+#        | TEXT BLANK TEXT
+#        | WORD TEXT
+#        '''
+#    if len(p)==3:
+#        p[0] = p[1] + p[2]
+#    elif len(p)==2:
+#        p[0] = p[1]
+#    else:
+#        p[0] = p[1] + p[2] + p[3]
 
 def p_error(p):
     if p:
