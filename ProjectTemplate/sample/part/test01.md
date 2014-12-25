@@ -1,6 +1,6 @@
 # forrest gump
 
-![gump](http://a1.att.hudong.com/24/64/01300001178110130097643491565.jpg)
+git [gump](http://a1.att.hudong.com/24/64/01300001178110130097643491565.jpg)
 
 
 ## OPENING
@@ -50,12 +50,13 @@ my `mama` always said:
 
 <http://www.github.com/guoylyy/>
 
-
+```
 import sys
 improt os
 
 print "i like this film"
 
+```
 
 * * *
 
