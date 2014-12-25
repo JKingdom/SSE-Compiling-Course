@@ -35,17 +35,15 @@ def p_exp_cr3(p):
 
 def p_exp_cr(p):
     '''expression : lines'''
-    p[0] = '<p>' + p[1] + '<\p>'
+    p[0] = '<p>' + p[1] + '</p>'
 
 def p_lines_factor(p):
     '''lines : lines factor
-        | lines factor CR
+        | lines CR
         | factor
     '''
     if(len(p) == 3):
         p[0] = p[1] + p[2]
-    elif(len(p) == 4):
-        p[0] = p[1] + p[2] + ' '
     else:
         p[0] = p[1]
 
@@ -58,23 +56,77 @@ def p_factor_TEXT(p):
     #p[0] = '<br/>'
 
 def p_emfactor_TEXT(p):
-    '''factor : STAR TEXT STAR
-        | UL TEXT UL '''
+    '''factor : STAR TEXT STAR'''
     p[0] = '<em>' + str(p[2]) + '</em>'
 
 def p_strongfactor_TEXT(p):
-    '''factor : DOUBLESTAR TEXT DOUBLESTAR
-        | DUL TEXT DUL '''
+    '''factor : DOUBLESTAR TEXT DOUBLESTAR'''
     p[0] = '<strong>' + str(p[2]) + '</strong>'
+
+def p_code_TEXT(p):
+    '''factor : CODE TEXT CODE'''
+    p[0] = '<code>' + str(p[2]) + '</code>'
+
+
+def p_lrsm(p):
+    '''factor : LEMI factor RIMI LESM factor RISM'''
+    p[0] = '<a href="' + str(p[5]) + '">' + str(p[2]) + '</a>'
+
+
+def p_lrst(p):
+    '''factor : LEST factor RIST'''
+    p[0] = '<a href="' + str(p[2]) + '">' + str(p[2]) + '</a>'
 
 
 def p_hr(p):
-    '''expression : SUB CR
-        | SUB
-        | EQL CR
-        | EQL
+    '''expression : HR CR
     '''
     p[0] = '<hr/>'
+
+
+def p_ex_ul(p):
+    '''expression : ul CR'''
+    p[0] = '<ul>' + p[1] + '</ul>'
+
+
+def p_ex_ol(p):
+    '''expression : ol CR'''
+    p[0] = '<ol>' + p[1] + '</ol>'
+
+
+
+def p_ul(p):
+    '''ul : ul CR li
+        | li
+    '''
+    if len(p) == 4:
+        p[0] = p[1] + p[3]
+    else:
+        p[0] = p[1]
+
+
+
+def p_ol(p):
+    '''ol : ol CR nli
+        | nli
+    '''
+    if len(p) == 4:
+        p[0] = p[1] + p[3]
+    else:
+        p[0] = p[1]
+
+
+
+def p_li(p):
+    '''li : LI factor
+        | STAR factor
+    '''
+    p[0] = '<li>' + str(p[2]) + '</li>'
+
+def p_nli(p):
+    '''nli : NLI factor'''
+    p[0] = '<li>' + str(p[2]) + '</li>'
+
 
 #def p_TEXT_word(p):
 #    '''TEXT : WORD
