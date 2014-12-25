@@ -1,67 +1,104 @@
 Created by PLY version 3.4 (http://www.dabeaz.com/ply)
 
+Unused terminals:
+
+    TRNLI
+    SENLI
+
 Grammar
 
 Rule 0     S' -> body
 Rule 1     body -> statement
 Rule 2     statement -> expression
 Rule 3     statement -> statement expression
-Rule 4     expression -> H1 factor CR
-Rule 5     expression -> H2 factor CR
-Rule 6     expression -> H3 factor CR
+Rule 4     expression -> H1 factor cr
+Rule 5     expression -> H2 factor cr
+Rule 6     expression -> H3 factor cr
 Rule 7     expression -> lines
-Rule 8     lines -> lines factor
-Rule 9     lines -> lines CR
-Rule 10    lines -> factor
-Rule 11    factor -> TEXT
-Rule 12    factor -> STAR TEXT STAR
-Rule 13    factor -> DOUBLESTAR TEXT DOUBLESTAR
-Rule 14    factor -> CODE TEXT CODE
-Rule 15    factor -> LEMI factor RIMI LESM factor RISM
-Rule 16    factor -> LEST factor RIST
-Rule 17    expression -> HR CR
-Rule 18    expression -> ul CR
-Rule 19    expression -> ol CR
-Rule 20    ul -> ul CR li
-Rule 21    ul -> li
-Rule 22    ol -> ol CR nli
-Rule 23    ol -> nli
-Rule 24    li -> LI factor
-Rule 25    li -> STAR factor
-Rule 26    nli -> NLI factor
+Rule 8     expression -> block
+Rule 9     lines -> lines factor
+Rule 10    lines -> lines cr
+Rule 11    lines -> factor
+Rule 12    block -> block bline
+Rule 13    block -> bline
+Rule 14    bline -> RIST lines cr
+Rule 15    factor -> text
+Rule 16    factor -> STAR factor STAR
+Rule 17    factor -> DOUBLESTAR factor DOUBLESTAR
+Rule 18    factor -> POINT factor POINT
+Rule 19    text -> TEXT
+Rule 20    text -> text NUMBER
+Rule 21    text -> text TEXT
+Rule 22    factor -> LEMI factor RIMI LESM factor RISM
+Rule 23    factor -> LEST factor RIST
+Rule 24    expression -> HR cr
+Rule 25    expression -> ul
+Rule 26    expression -> ol
+Rule 27    ul -> ul li
+Rule 28    ul -> li
+Rule 29    seul -> seul seli
+Rule 30    seul -> seli
+Rule 31    li -> LI factor cr
+Rule 32    li -> seul
+Rule 33    seli -> SELI factor cr
+Rule 34    seli -> trul
+Rule 35    trul -> trul trli
+Rule 36    trul -> trli
+Rule 37    trli -> TRLI factor cr
+Rule 38    ol -> ol nli
+Rule 39    ol -> nli
+Rule 40    nli -> NLI factor cr
+Rule 41    nli -> seul
+Rule 42    cr -> CR
+Rule 43    cr -> T cr
+Rule 44    cr -> cr CR
 
 Terminals, with rules where they appear
 
-CODE                 : 14 14
-CR                   : 4 5 6 9 17 18 19 20 22
-DOUBLESTAR           : 13 13
+CR                   : 42 44
+DOUBLESTAR           : 17 17
 H1                   : 4
 H2                   : 5
 H3                   : 6
-HR                   : 17
-LEMI                 : 15
-LESM                 : 15
-LEST                 : 16
-LI                   : 24
-NLI                  : 26
-RIMI                 : 15
-RISM                 : 15
-RIST                 : 16
-STAR                 : 12 12 25
-TEXT                 : 11 12 13 14
+HR                   : 24
+LEMI                 : 22
+LESM                 : 22
+LEST                 : 23
+LI                   : 31
+NLI                  : 40
+NUMBER               : 20
+POINT                : 18 18
+RIMI                 : 22
+RISM                 : 22
+RIST                 : 14 23
+SELI                 : 33
+SENLI                : 
+STAR                 : 16 16
+T                    : 43
+TEXT                 : 19 21
+TRLI                 : 37
+TRNLI                : 
 error                : 
 
 Nonterminals, with rules where they appear
 
+bline                : 12 13
+block                : 8 12
 body                 : 0
+cr                   : 4 5 6 10 14 24 31 33 37 40 43 44
 expression           : 2 3
-factor               : 4 5 6 8 10 15 15 16 24 25 26
-li                   : 20 21
-lines                : 7 8 9
-nli                  : 22 23
-ol                   : 19 22
+factor               : 4 5 6 9 11 16 17 18 22 22 23 31 33 37 40
+li                   : 27 28
+lines                : 7 9 10 14
+nli                  : 38 39
+ol                   : 26 38
+seli                 : 29 30
+seul                 : 29 32 41
 statement            : 1 3
-ul                   : 18 20
+text                 : 15 20 21
+trli                 : 35 36
+trul                 : 34 35
+ul                   : 25 27
 
 Parsing method: LALR
 
@@ -71,399 +108,907 @@ state 0
     (1) body -> . statement
     (2) statement -> . expression
     (3) statement -> . statement expression
-    (4) expression -> . H1 factor CR
-    (5) expression -> . H2 factor CR
-    (6) expression -> . H3 factor CR
+    (4) expression -> . H1 factor cr
+    (5) expression -> . H2 factor cr
+    (6) expression -> . H3 factor cr
     (7) expression -> . lines
-    (17) expression -> . HR CR
-    (18) expression -> . ul CR
-    (19) expression -> . ol CR
-    (8) lines -> . lines factor
-    (9) lines -> . lines CR
-    (10) lines -> . factor
-    (20) ul -> . ul CR li
-    (21) ul -> . li
-    (22) ol -> . ol CR nli
-    (23) ol -> . nli
-    (11) factor -> . TEXT
-    (12) factor -> . STAR TEXT STAR
-    (13) factor -> . DOUBLESTAR TEXT DOUBLESTAR
-    (14) factor -> . CODE TEXT CODE
-    (15) factor -> . LEMI factor RIMI LESM factor RISM
-    (16) factor -> . LEST factor RIST
-    (24) li -> . LI factor
-    (25) li -> . STAR factor
-    (26) nli -> . NLI factor
+    (8) expression -> . block
+    (24) expression -> . HR cr
+    (25) expression -> . ul
+    (26) expression -> . ol
+    (9) lines -> . lines factor
+    (10) lines -> . lines cr
+    (11) lines -> . factor
+    (12) block -> . block bline
+    (13) block -> . bline
+    (27) ul -> . ul li
+    (28) ul -> . li
+    (38) ol -> . ol nli
+    (39) ol -> . nli
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (14) bline -> . RIST lines cr
+    (31) li -> . LI factor cr
+    (32) li -> . seul
+    (40) nli -> . NLI factor cr
+    (41) nli -> . seul
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
+    (29) seul -> . seul seli
+    (30) seul -> . seli
+    (33) seli -> . SELI factor cr
+    (34) seli -> . trul
+    (35) trul -> . trul trli
+    (36) trul -> . trli
+    (37) trli -> . TRLI factor cr
 
-    H1              shift and go to state 18
-    H2              shift and go to state 16
-    H3              shift and go to state 17
+    H1              shift and go to state 27
+    H2              shift and go to state 25
+    H3              shift and go to state 26
     HR              shift and go to state 5
-    TEXT            shift and go to state 6
     STAR            shift and go to state 3
-    DOUBLESTAR      shift and go to state 7
-    CODE            shift and go to state 2
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
     LEMI            shift and go to state 4
     LEST            shift and go to state 1
+    RIST            shift and go to state 21
     LI              shift and go to state 9
-    NLI             shift and go to state 13
+    NLI             shift and go to state 17
+    TEXT            shift and go to state 19
+    SELI            shift and go to state 24
+    TRLI            shift and go to state 10
 
-    body                           shift and go to state 14
-    ol                             shift and go to state 15
-    lines                          shift and go to state 19
-    li                             shift and go to state 10
-    ul                             shift and go to state 20
-    statement                      shift and go to state 11
-    factor                         shift and go to state 12
-    nli                            shift and go to state 8
-    expression                     shift and go to state 21
+    body                           shift and go to state 18
+    bline                          shift and go to state 2
+    ol                             shift and go to state 23
+    seli                           shift and go to state 11
+    text                           shift and go to state 6
+    seul                           shift and go to state 13
+    lines                          shift and go to state 28
+    li                             shift and go to state 14
+    ul                             shift and go to state 29
+    trul                           shift and go to state 20
+    statement                      shift and go to state 15
+    factor                         shift and go to state 16
+    nli                            shift and go to state 7
+    expression                     shift and go to state 30
+    block                          shift and go to state 31
+    trli                           shift and go to state 22
 
 state 1
 
-    (16) factor -> LEST . factor RIST
-    (11) factor -> . TEXT
-    (12) factor -> . STAR TEXT STAR
-    (13) factor -> . DOUBLESTAR TEXT DOUBLESTAR
-    (14) factor -> . CODE TEXT CODE
-    (15) factor -> . LEMI factor RIMI LESM factor RISM
-    (16) factor -> . LEST factor RIST
+    (23) factor -> LEST . factor RIST
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
 
-    TEXT            shift and go to state 6
-    STAR            shift and go to state 22
-    DOUBLESTAR      shift and go to state 7
-    CODE            shift and go to state 2
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
     LEMI            shift and go to state 4
     LEST            shift and go to state 1
+    TEXT            shift and go to state 19
 
-    factor                         shift and go to state 23
+    text                           shift and go to state 6
+    factor                         shift and go to state 32
 
 state 2
 
-    (14) factor -> CODE . TEXT CODE
+    (13) block -> bline .
 
-    TEXT            shift and go to state 24
+    RIST            reduce using rule 13 (block -> bline .)
+    H1              reduce using rule 13 (block -> bline .)
+    H2              reduce using rule 13 (block -> bline .)
+    H3              reduce using rule 13 (block -> bline .)
+    HR              reduce using rule 13 (block -> bline .)
+    STAR            reduce using rule 13 (block -> bline .)
+    DOUBLESTAR      reduce using rule 13 (block -> bline .)
+    POINT           reduce using rule 13 (block -> bline .)
+    LEMI            reduce using rule 13 (block -> bline .)
+    LEST            reduce using rule 13 (block -> bline .)
+    LI              reduce using rule 13 (block -> bline .)
+    NLI             reduce using rule 13 (block -> bline .)
+    TEXT            reduce using rule 13 (block -> bline .)
+    SELI            reduce using rule 13 (block -> bline .)
+    TRLI            reduce using rule 13 (block -> bline .)
+    $end            reduce using rule 13 (block -> bline .)
 
 
 state 3
 
-    (12) factor -> STAR . TEXT STAR
-    (25) li -> STAR . factor
-    (11) factor -> . TEXT
-    (12) factor -> . STAR TEXT STAR
-    (13) factor -> . DOUBLESTAR TEXT DOUBLESTAR
-    (14) factor -> . CODE TEXT CODE
-    (15) factor -> . LEMI factor RIMI LESM factor RISM
-    (16) factor -> . LEST factor RIST
+    (16) factor -> STAR . factor STAR
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
 
-    TEXT            shift and go to state 25
-    STAR            shift and go to state 22
-    DOUBLESTAR      shift and go to state 7
-    CODE            shift and go to state 2
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
     LEMI            shift and go to state 4
     LEST            shift and go to state 1
+    TEXT            shift and go to state 19
 
-    factor                         shift and go to state 26
+    text                           shift and go to state 6
+    factor                         shift and go to state 33
 
 state 4
 
-    (15) factor -> LEMI . factor RIMI LESM factor RISM
-    (11) factor -> . TEXT
-    (12) factor -> . STAR TEXT STAR
-    (13) factor -> . DOUBLESTAR TEXT DOUBLESTAR
-    (14) factor -> . CODE TEXT CODE
-    (15) factor -> . LEMI factor RIMI LESM factor RISM
-    (16) factor -> . LEST factor RIST
+    (22) factor -> LEMI . factor RIMI LESM factor RISM
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
 
-    TEXT            shift and go to state 6
-    STAR            shift and go to state 22
-    DOUBLESTAR      shift and go to state 7
-    CODE            shift and go to state 2
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
     LEMI            shift and go to state 4
     LEST            shift and go to state 1
+    TEXT            shift and go to state 19
 
-    factor                         shift and go to state 27
+    text                           shift and go to state 6
+    factor                         shift and go to state 34
 
 state 5
 
-    (17) expression -> HR . CR
+    (24) expression -> HR . cr
+    (42) cr -> . CR
+    (43) cr -> . T cr
+    (44) cr -> . cr CR
 
-    CR              shift and go to state 28
+    CR              shift and go to state 37
+    T               shift and go to state 36
 
+    cr                             shift and go to state 35
 
 state 6
 
-    (11) factor -> TEXT .
+    (15) factor -> text .
+    (20) text -> text . NUMBER
+    (21) text -> text . TEXT
 
-    CR              reduce using rule 11 (factor -> TEXT .)
-    RIMI            reduce using rule 11 (factor -> TEXT .)
-    TEXT            reduce using rule 11 (factor -> TEXT .)
-    STAR            reduce using rule 11 (factor -> TEXT .)
-    DOUBLESTAR      reduce using rule 11 (factor -> TEXT .)
-    CODE            reduce using rule 11 (factor -> TEXT .)
-    LEMI            reduce using rule 11 (factor -> TEXT .)
-    LEST            reduce using rule 11 (factor -> TEXT .)
-    H1              reduce using rule 11 (factor -> TEXT .)
-    H2              reduce using rule 11 (factor -> TEXT .)
-    H3              reduce using rule 11 (factor -> TEXT .)
-    HR              reduce using rule 11 (factor -> TEXT .)
-    LI              reduce using rule 11 (factor -> TEXT .)
-    NLI             reduce using rule 11 (factor -> TEXT .)
-    $end            reduce using rule 11 (factor -> TEXT .)
-    RIST            reduce using rule 11 (factor -> TEXT .)
-    RISM            reduce using rule 11 (factor -> TEXT .)
+  ! shift/reduce conflict for TEXT resolved as shift
+    RIMI            reduce using rule 15 (factor -> text .)
+    CR              reduce using rule 15 (factor -> text .)
+    T               reduce using rule 15 (factor -> text .)
+    STAR            reduce using rule 15 (factor -> text .)
+    DOUBLESTAR      reduce using rule 15 (factor -> text .)
+    POINT           reduce using rule 15 (factor -> text .)
+    LEMI            reduce using rule 15 (factor -> text .)
+    LEST            reduce using rule 15 (factor -> text .)
+    H1              reduce using rule 15 (factor -> text .)
+    H2              reduce using rule 15 (factor -> text .)
+    H3              reduce using rule 15 (factor -> text .)
+    HR              reduce using rule 15 (factor -> text .)
+    RIST            reduce using rule 15 (factor -> text .)
+    LI              reduce using rule 15 (factor -> text .)
+    NLI             reduce using rule 15 (factor -> text .)
+    SELI            reduce using rule 15 (factor -> text .)
+    TRLI            reduce using rule 15 (factor -> text .)
+    $end            reduce using rule 15 (factor -> text .)
+    RISM            reduce using rule 15 (factor -> text .)
+    NUMBER          shift and go to state 38
+    TEXT            shift and go to state 39
+
+  ! TEXT            [ reduce using rule 15 (factor -> text .) ]
 
 
 state 7
 
-    (13) factor -> DOUBLESTAR . TEXT DOUBLESTAR
+    (39) ol -> nli .
 
-    TEXT            shift and go to state 29
+    NLI             reduce using rule 39 (ol -> nli .)
+    SELI            reduce using rule 39 (ol -> nli .)
+    TRLI            reduce using rule 39 (ol -> nli .)
+    H1              reduce using rule 39 (ol -> nli .)
+    H2              reduce using rule 39 (ol -> nli .)
+    H3              reduce using rule 39 (ol -> nli .)
+    HR              reduce using rule 39 (ol -> nli .)
+    STAR            reduce using rule 39 (ol -> nli .)
+    DOUBLESTAR      reduce using rule 39 (ol -> nli .)
+    POINT           reduce using rule 39 (ol -> nli .)
+    LEMI            reduce using rule 39 (ol -> nli .)
+    LEST            reduce using rule 39 (ol -> nli .)
+    RIST            reduce using rule 39 (ol -> nli .)
+    LI              reduce using rule 39 (ol -> nli .)
+    TEXT            reduce using rule 39 (ol -> nli .)
+    $end            reduce using rule 39 (ol -> nli .)
 
 
 state 8
 
-    (23) ol -> nli .
+    (17) factor -> DOUBLESTAR . factor DOUBLESTAR
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
 
-    CR              reduce using rule 23 (ol -> nli .)
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
+    LEMI            shift and go to state 4
+    LEST            shift and go to state 1
+    TEXT            shift and go to state 19
 
+    text                           shift and go to state 6
+    factor                         shift and go to state 40
 
 state 9
 
-    (24) li -> LI . factor
-    (11) factor -> . TEXT
-    (12) factor -> . STAR TEXT STAR
-    (13) factor -> . DOUBLESTAR TEXT DOUBLESTAR
-    (14) factor -> . CODE TEXT CODE
-    (15) factor -> . LEMI factor RIMI LESM factor RISM
-    (16) factor -> . LEST factor RIST
+    (31) li -> LI . factor cr
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
 
-    TEXT            shift and go to state 6
-    STAR            shift and go to state 22
-    DOUBLESTAR      shift and go to state 7
-    CODE            shift and go to state 2
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
     LEMI            shift and go to state 4
     LEST            shift and go to state 1
+    TEXT            shift and go to state 19
 
-    factor                         shift and go to state 30
+    text                           shift and go to state 6
+    factor                         shift and go to state 41
 
 state 10
 
-    (21) ul -> li .
+    (37) trli -> TRLI . factor cr
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
 
-    CR              reduce using rule 21 (ul -> li .)
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
+    LEMI            shift and go to state 4
+    LEST            shift and go to state 1
+    TEXT            shift and go to state 19
 
+    text                           shift and go to state 6
+    factor                         shift and go to state 42
 
 state 11
 
-    (1) body -> statement .
-    (3) statement -> statement . expression
-    (4) expression -> . H1 factor CR
-    (5) expression -> . H2 factor CR
-    (6) expression -> . H3 factor CR
-    (7) expression -> . lines
-    (17) expression -> . HR CR
-    (18) expression -> . ul CR
-    (19) expression -> . ol CR
-    (8) lines -> . lines factor
-    (9) lines -> . lines CR
-    (10) lines -> . factor
-    (20) ul -> . ul CR li
-    (21) ul -> . li
-    (22) ol -> . ol CR nli
-    (23) ol -> . nli
-    (11) factor -> . TEXT
-    (12) factor -> . STAR TEXT STAR
-    (13) factor -> . DOUBLESTAR TEXT DOUBLESTAR
-    (14) factor -> . CODE TEXT CODE
-    (15) factor -> . LEMI factor RIMI LESM factor RISM
-    (16) factor -> . LEST factor RIST
-    (24) li -> . LI factor
-    (25) li -> . STAR factor
-    (26) nli -> . NLI factor
+    (30) seul -> seli .
 
-    $end            reduce using rule 1 (body -> statement .)
-    H1              shift and go to state 18
-    H2              shift and go to state 16
-    H3              shift and go to state 17
-    HR              shift and go to state 5
-    TEXT            shift and go to state 6
-    STAR            shift and go to state 3
-    DOUBLESTAR      shift and go to state 7
-    CODE            shift and go to state 2
-    LEMI            shift and go to state 4
-    LEST            shift and go to state 1
-    LI              shift and go to state 9
-    NLI             shift and go to state 13
+    SELI            reduce using rule 30 (seul -> seli .)
+    TRLI            reduce using rule 30 (seul -> seli .)
+    LI              reduce using rule 30 (seul -> seli .)
+    H1              reduce using rule 30 (seul -> seli .)
+    H2              reduce using rule 30 (seul -> seli .)
+    H3              reduce using rule 30 (seul -> seli .)
+    HR              reduce using rule 30 (seul -> seli .)
+    STAR            reduce using rule 30 (seul -> seli .)
+    DOUBLESTAR      reduce using rule 30 (seul -> seli .)
+    POINT           reduce using rule 30 (seul -> seli .)
+    LEMI            reduce using rule 30 (seul -> seli .)
+    LEST            reduce using rule 30 (seul -> seli .)
+    RIST            reduce using rule 30 (seul -> seli .)
+    NLI             reduce using rule 30 (seul -> seli .)
+    TEXT            reduce using rule 30 (seul -> seli .)
+    $end            reduce using rule 30 (seul -> seli .)
 
-    ol                             shift and go to state 15
-    lines                          shift and go to state 19
-    li                             shift and go to state 10
-    ul                             shift and go to state 20
-    factor                         shift and go to state 12
-    nli                            shift and go to state 8
-    expression                     shift and go to state 31
 
 state 12
 
-    (10) lines -> factor .
+    (18) factor -> POINT . factor POINT
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
 
-    CR              reduce using rule 10 (lines -> factor .)
-    TEXT            reduce using rule 10 (lines -> factor .)
-    STAR            reduce using rule 10 (lines -> factor .)
-    DOUBLESTAR      reduce using rule 10 (lines -> factor .)
-    CODE            reduce using rule 10 (lines -> factor .)
-    LEMI            reduce using rule 10 (lines -> factor .)
-    LEST            reduce using rule 10 (lines -> factor .)
-    H1              reduce using rule 10 (lines -> factor .)
-    H2              reduce using rule 10 (lines -> factor .)
-    H3              reduce using rule 10 (lines -> factor .)
-    HR              reduce using rule 10 (lines -> factor .)
-    LI              reduce using rule 10 (lines -> factor .)
-    NLI             reduce using rule 10 (lines -> factor .)
-    $end            reduce using rule 10 (lines -> factor .)
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
+    LEMI            shift and go to state 4
+    LEST            shift and go to state 1
+    TEXT            shift and go to state 19
 
+    text                           shift and go to state 6
+    factor                         shift and go to state 43
 
 state 13
 
-    (26) nli -> NLI . factor
-    (11) factor -> . TEXT
-    (12) factor -> . STAR TEXT STAR
-    (13) factor -> . DOUBLESTAR TEXT DOUBLESTAR
-    (14) factor -> . CODE TEXT CODE
-    (15) factor -> . LEMI factor RIMI LESM factor RISM
-    (16) factor -> . LEST factor RIST
+    (32) li -> seul .
+    (41) nli -> seul .
+    (29) seul -> seul . seli
+    (33) seli -> . SELI factor cr
+    (34) seli -> . trul
+    (35) trul -> . trul trli
+    (36) trul -> . trli
+    (37) trli -> . TRLI factor cr
 
-    TEXT            shift and go to state 6
-    STAR            shift and go to state 22
-    DOUBLESTAR      shift and go to state 7
-    CODE            shift and go to state 2
-    LEMI            shift and go to state 4
-    LEST            shift and go to state 1
+  ! reduce/reduce conflict for NLI resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for SELI resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for TRLI resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for H1 resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for H2 resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for H3 resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for HR resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for STAR resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for DOUBLESTAR resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for POINT resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for LEMI resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for LEST resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for RIST resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for LI resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for TEXT resolved using rule 32 (li -> seul .)
+  ! reduce/reduce conflict for $end resolved using rule 32 (li -> seul .)
+  ! shift/reduce conflict for SELI resolved as shift
+  ! shift/reduce conflict for TRLI resolved as shift
+    LI              reduce using rule 32 (li -> seul .)
+    H1              reduce using rule 32 (li -> seul .)
+    H2              reduce using rule 32 (li -> seul .)
+    H3              reduce using rule 32 (li -> seul .)
+    HR              reduce using rule 32 (li -> seul .)
+    STAR            reduce using rule 32 (li -> seul .)
+    DOUBLESTAR      reduce using rule 32 (li -> seul .)
+    POINT           reduce using rule 32 (li -> seul .)
+    LEMI            reduce using rule 32 (li -> seul .)
+    LEST            reduce using rule 32 (li -> seul .)
+    RIST            reduce using rule 32 (li -> seul .)
+    NLI             reduce using rule 32 (li -> seul .)
+    TEXT            reduce using rule 32 (li -> seul .)
+    $end            reduce using rule 32 (li -> seul .)
+    SELI            shift and go to state 24
+    TRLI            shift and go to state 10
 
-    factor                         shift and go to state 32
+  ! SELI            [ reduce using rule 32 (li -> seul .) ]
+  ! TRLI            [ reduce using rule 32 (li -> seul .) ]
+  ! NLI             [ reduce using rule 41 (nli -> seul .) ]
+  ! SELI            [ reduce using rule 41 (nli -> seul .) ]
+  ! TRLI            [ reduce using rule 41 (nli -> seul .) ]
+  ! H1              [ reduce using rule 41 (nli -> seul .) ]
+  ! H2              [ reduce using rule 41 (nli -> seul .) ]
+  ! H3              [ reduce using rule 41 (nli -> seul .) ]
+  ! HR              [ reduce using rule 41 (nli -> seul .) ]
+  ! STAR            [ reduce using rule 41 (nli -> seul .) ]
+  ! DOUBLESTAR      [ reduce using rule 41 (nli -> seul .) ]
+  ! POINT           [ reduce using rule 41 (nli -> seul .) ]
+  ! LEMI            [ reduce using rule 41 (nli -> seul .) ]
+  ! LEST            [ reduce using rule 41 (nli -> seul .) ]
+  ! RIST            [ reduce using rule 41 (nli -> seul .) ]
+  ! LI              [ reduce using rule 41 (nli -> seul .) ]
+  ! TEXT            [ reduce using rule 41 (nli -> seul .) ]
+  ! $end            [ reduce using rule 41 (nli -> seul .) ]
+
+    seli                           shift and go to state 44
+    trul                           shift and go to state 20
+    trli                           shift and go to state 22
 
 state 14
+
+    (28) ul -> li .
+
+    LI              reduce using rule 28 (ul -> li .)
+    SELI            reduce using rule 28 (ul -> li .)
+    TRLI            reduce using rule 28 (ul -> li .)
+    H1              reduce using rule 28 (ul -> li .)
+    H2              reduce using rule 28 (ul -> li .)
+    H3              reduce using rule 28 (ul -> li .)
+    HR              reduce using rule 28 (ul -> li .)
+    STAR            reduce using rule 28 (ul -> li .)
+    DOUBLESTAR      reduce using rule 28 (ul -> li .)
+    POINT           reduce using rule 28 (ul -> li .)
+    LEMI            reduce using rule 28 (ul -> li .)
+    LEST            reduce using rule 28 (ul -> li .)
+    RIST            reduce using rule 28 (ul -> li .)
+    NLI             reduce using rule 28 (ul -> li .)
+    TEXT            reduce using rule 28 (ul -> li .)
+    $end            reduce using rule 28 (ul -> li .)
+
+
+state 15
+
+    (1) body -> statement .
+    (3) statement -> statement . expression
+    (4) expression -> . H1 factor cr
+    (5) expression -> . H2 factor cr
+    (6) expression -> . H3 factor cr
+    (7) expression -> . lines
+    (8) expression -> . block
+    (24) expression -> . HR cr
+    (25) expression -> . ul
+    (26) expression -> . ol
+    (9) lines -> . lines factor
+    (10) lines -> . lines cr
+    (11) lines -> . factor
+    (12) block -> . block bline
+    (13) block -> . bline
+    (27) ul -> . ul li
+    (28) ul -> . li
+    (38) ol -> . ol nli
+    (39) ol -> . nli
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (14) bline -> . RIST lines cr
+    (31) li -> . LI factor cr
+    (32) li -> . seul
+    (40) nli -> . NLI factor cr
+    (41) nli -> . seul
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
+    (29) seul -> . seul seli
+    (30) seul -> . seli
+    (33) seli -> . SELI factor cr
+    (34) seli -> . trul
+    (35) trul -> . trul trli
+    (36) trul -> . trli
+    (37) trli -> . TRLI factor cr
+
+    $end            reduce using rule 1 (body -> statement .)
+    H1              shift and go to state 27
+    H2              shift and go to state 25
+    H3              shift and go to state 26
+    HR              shift and go to state 5
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
+    LEMI            shift and go to state 4
+    LEST            shift and go to state 1
+    RIST            shift and go to state 21
+    LI              shift and go to state 9
+    NLI             shift and go to state 17
+    TEXT            shift and go to state 19
+    SELI            shift and go to state 24
+    TRLI            shift and go to state 10
+
+    bline                          shift and go to state 2
+    ol                             shift and go to state 23
+    seli                           shift and go to state 11
+    text                           shift and go to state 6
+    seul                           shift and go to state 13
+    lines                          shift and go to state 28
+    li                             shift and go to state 14
+    ul                             shift and go to state 29
+    trul                           shift and go to state 20
+    factor                         shift and go to state 16
+    nli                            shift and go to state 7
+    expression                     shift and go to state 45
+    block                          shift and go to state 31
+    trli                           shift and go to state 22
+
+state 16
+
+    (11) lines -> factor .
+
+    STAR            reduce using rule 11 (lines -> factor .)
+    DOUBLESTAR      reduce using rule 11 (lines -> factor .)
+    POINT           reduce using rule 11 (lines -> factor .)
+    LEMI            reduce using rule 11 (lines -> factor .)
+    LEST            reduce using rule 11 (lines -> factor .)
+    CR              reduce using rule 11 (lines -> factor .)
+    T               reduce using rule 11 (lines -> factor .)
+    TEXT            reduce using rule 11 (lines -> factor .)
+    H1              reduce using rule 11 (lines -> factor .)
+    H2              reduce using rule 11 (lines -> factor .)
+    H3              reduce using rule 11 (lines -> factor .)
+    HR              reduce using rule 11 (lines -> factor .)
+    RIST            reduce using rule 11 (lines -> factor .)
+    LI              reduce using rule 11 (lines -> factor .)
+    NLI             reduce using rule 11 (lines -> factor .)
+    SELI            reduce using rule 11 (lines -> factor .)
+    TRLI            reduce using rule 11 (lines -> factor .)
+    $end            reduce using rule 11 (lines -> factor .)
+
+
+state 17
+
+    (40) nli -> NLI . factor cr
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
+
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
+    LEMI            shift and go to state 4
+    LEST            shift and go to state 1
+    TEXT            shift and go to state 19
+
+    text                           shift and go to state 6
+    factor                         shift and go to state 46
+
+state 18
 
     (0) S' -> body .
 
 
 
-state 15
-
-    (19) expression -> ol . CR
-    (22) ol -> ol . CR nli
-
-    CR              shift and go to state 33
-
-
-state 16
-
-    (5) expression -> H2 . factor CR
-    (11) factor -> . TEXT
-    (12) factor -> . STAR TEXT STAR
-    (13) factor -> . DOUBLESTAR TEXT DOUBLESTAR
-    (14) factor -> . CODE TEXT CODE
-    (15) factor -> . LEMI factor RIMI LESM factor RISM
-    (16) factor -> . LEST factor RIST
-
-    TEXT            shift and go to state 6
-    STAR            shift and go to state 22
-    DOUBLESTAR      shift and go to state 7
-    CODE            shift and go to state 2
-    LEMI            shift and go to state 4
-    LEST            shift and go to state 1
-
-    factor                         shift and go to state 34
-
-state 17
-
-    (6) expression -> H3 . factor CR
-    (11) factor -> . TEXT
-    (12) factor -> . STAR TEXT STAR
-    (13) factor -> . DOUBLESTAR TEXT DOUBLESTAR
-    (14) factor -> . CODE TEXT CODE
-    (15) factor -> . LEMI factor RIMI LESM factor RISM
-    (16) factor -> . LEST factor RIST
-
-    TEXT            shift and go to state 6
-    STAR            shift and go to state 22
-    DOUBLESTAR      shift and go to state 7
-    CODE            shift and go to state 2
-    LEMI            shift and go to state 4
-    LEST            shift and go to state 1
-
-    factor                         shift and go to state 35
-
-state 18
-
-    (4) expression -> H1 . factor CR
-    (11) factor -> . TEXT
-    (12) factor -> . STAR TEXT STAR
-    (13) factor -> . DOUBLESTAR TEXT DOUBLESTAR
-    (14) factor -> . CODE TEXT CODE
-    (15) factor -> . LEMI factor RIMI LESM factor RISM
-    (16) factor -> . LEST factor RIST
-
-    TEXT            shift and go to state 6
-    STAR            shift and go to state 22
-    DOUBLESTAR      shift and go to state 7
-    CODE            shift and go to state 2
-    LEMI            shift and go to state 4
-    LEST            shift and go to state 1
-
-    factor                         shift and go to state 36
-
 state 19
 
-    (7) expression -> lines .
-    (8) lines -> lines . factor
-    (9) lines -> lines . CR
-    (11) factor -> . TEXT
-    (12) factor -> . STAR TEXT STAR
-    (13) factor -> . DOUBLESTAR TEXT DOUBLESTAR
-    (14) factor -> . CODE TEXT CODE
-    (15) factor -> . LEMI factor RIMI LESM factor RISM
-    (16) factor -> . LEST factor RIST
+    (19) text -> TEXT .
 
-  ! shift/reduce conflict for TEXT resolved as shift
+    NUMBER          reduce using rule 19 (text -> TEXT .)
+    TEXT            reduce using rule 19 (text -> TEXT .)
+    CR              reduce using rule 19 (text -> TEXT .)
+    T               reduce using rule 19 (text -> TEXT .)
+    STAR            reduce using rule 19 (text -> TEXT .)
+    DOUBLESTAR      reduce using rule 19 (text -> TEXT .)
+    POINT           reduce using rule 19 (text -> TEXT .)
+    LEMI            reduce using rule 19 (text -> TEXT .)
+    LEST            reduce using rule 19 (text -> TEXT .)
+    H1              reduce using rule 19 (text -> TEXT .)
+    H2              reduce using rule 19 (text -> TEXT .)
+    H3              reduce using rule 19 (text -> TEXT .)
+    HR              reduce using rule 19 (text -> TEXT .)
+    RIST            reduce using rule 19 (text -> TEXT .)
+    LI              reduce using rule 19 (text -> TEXT .)
+    NLI             reduce using rule 19 (text -> TEXT .)
+    SELI            reduce using rule 19 (text -> TEXT .)
+    TRLI            reduce using rule 19 (text -> TEXT .)
+    $end            reduce using rule 19 (text -> TEXT .)
+    RISM            reduce using rule 19 (text -> TEXT .)
+    RIMI            reduce using rule 19 (text -> TEXT .)
+
+
+state 20
+
+    (34) seli -> trul .
+    (35) trul -> trul . trli
+    (37) trli -> . TRLI factor cr
+
+  ! shift/reduce conflict for TRLI resolved as shift
+    SELI            reduce using rule 34 (seli -> trul .)
+    NLI             reduce using rule 34 (seli -> trul .)
+    H1              reduce using rule 34 (seli -> trul .)
+    H2              reduce using rule 34 (seli -> trul .)
+    H3              reduce using rule 34 (seli -> trul .)
+    HR              reduce using rule 34 (seli -> trul .)
+    STAR            reduce using rule 34 (seli -> trul .)
+    DOUBLESTAR      reduce using rule 34 (seli -> trul .)
+    POINT           reduce using rule 34 (seli -> trul .)
+    LEMI            reduce using rule 34 (seli -> trul .)
+    LEST            reduce using rule 34 (seli -> trul .)
+    RIST            reduce using rule 34 (seli -> trul .)
+    LI              reduce using rule 34 (seli -> trul .)
+    TEXT            reduce using rule 34 (seli -> trul .)
+    $end            reduce using rule 34 (seli -> trul .)
+    TRLI            shift and go to state 10
+
+  ! TRLI            [ reduce using rule 34 (seli -> trul .) ]
+
+    trli                           shift and go to state 47
+
+state 21
+
+    (14) bline -> RIST . lines cr
+    (9) lines -> . lines factor
+    (10) lines -> . lines cr
+    (11) lines -> . factor
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
+
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
+    LEMI            shift and go to state 4
+    LEST            shift and go to state 1
+    TEXT            shift and go to state 19
+
+    text                           shift and go to state 6
+    lines                          shift and go to state 48
+    factor                         shift and go to state 16
+
+state 22
+
+    (36) trul -> trli .
+
+    TRLI            reduce using rule 36 (trul -> trli .)
+    SELI            reduce using rule 36 (trul -> trli .)
+    LI              reduce using rule 36 (trul -> trli .)
+    H1              reduce using rule 36 (trul -> trli .)
+    H2              reduce using rule 36 (trul -> trli .)
+    H3              reduce using rule 36 (trul -> trli .)
+    HR              reduce using rule 36 (trul -> trli .)
+    STAR            reduce using rule 36 (trul -> trli .)
+    DOUBLESTAR      reduce using rule 36 (trul -> trli .)
+    POINT           reduce using rule 36 (trul -> trli .)
+    LEMI            reduce using rule 36 (trul -> trli .)
+    LEST            reduce using rule 36 (trul -> trli .)
+    RIST            reduce using rule 36 (trul -> trli .)
+    NLI             reduce using rule 36 (trul -> trli .)
+    TEXT            reduce using rule 36 (trul -> trli .)
+    $end            reduce using rule 36 (trul -> trli .)
+
+
+state 23
+
+    (26) expression -> ol .
+    (38) ol -> ol . nli
+    (40) nli -> . NLI factor cr
+    (41) nli -> . seul
+    (29) seul -> . seul seli
+    (30) seul -> . seli
+    (33) seli -> . SELI factor cr
+    (34) seli -> . trul
+    (35) trul -> . trul trli
+    (36) trul -> . trli
+    (37) trli -> . TRLI factor cr
+
+  ! shift/reduce conflict for NLI resolved as shift
+  ! shift/reduce conflict for SELI resolved as shift
+  ! shift/reduce conflict for TRLI resolved as shift
+    H1              reduce using rule 26 (expression -> ol .)
+    H2              reduce using rule 26 (expression -> ol .)
+    H3              reduce using rule 26 (expression -> ol .)
+    HR              reduce using rule 26 (expression -> ol .)
+    STAR            reduce using rule 26 (expression -> ol .)
+    DOUBLESTAR      reduce using rule 26 (expression -> ol .)
+    POINT           reduce using rule 26 (expression -> ol .)
+    LEMI            reduce using rule 26 (expression -> ol .)
+    LEST            reduce using rule 26 (expression -> ol .)
+    RIST            reduce using rule 26 (expression -> ol .)
+    LI              reduce using rule 26 (expression -> ol .)
+    TEXT            reduce using rule 26 (expression -> ol .)
+    $end            reduce using rule 26 (expression -> ol .)
+    NLI             shift and go to state 17
+    SELI            shift and go to state 24
+    TRLI            shift and go to state 10
+
+  ! NLI             [ reduce using rule 26 (expression -> ol .) ]
+  ! SELI            [ reduce using rule 26 (expression -> ol .) ]
+  ! TRLI            [ reduce using rule 26 (expression -> ol .) ]
+
+    seli                           shift and go to state 11
+    seul                           shift and go to state 49
+    trul                           shift and go to state 20
+    nli                            shift and go to state 50
+    trli                           shift and go to state 22
+
+state 24
+
+    (33) seli -> SELI . factor cr
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
+
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
+    LEMI            shift and go to state 4
+    LEST            shift and go to state 1
+    TEXT            shift and go to state 19
+
+    text                           shift and go to state 6
+    factor                         shift and go to state 51
+
+state 25
+
+    (5) expression -> H2 . factor cr
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
+
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
+    LEMI            shift and go to state 4
+    LEST            shift and go to state 1
+    TEXT            shift and go to state 19
+
+    text                           shift and go to state 6
+    factor                         shift and go to state 52
+
+state 26
+
+    (6) expression -> H3 . factor cr
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
+
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
+    LEMI            shift and go to state 4
+    LEST            shift and go to state 1
+    TEXT            shift and go to state 19
+
+    text                           shift and go to state 6
+    factor                         shift and go to state 53
+
+state 27
+
+    (4) expression -> H1 . factor cr
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
+
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
+    LEMI            shift and go to state 4
+    LEST            shift and go to state 1
+    TEXT            shift and go to state 19
+
+    text                           shift and go to state 6
+    factor                         shift and go to state 54
+
+state 28
+
+    (7) expression -> lines .
+    (9) lines -> lines . factor
+    (10) lines -> lines . cr
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (42) cr -> . CR
+    (43) cr -> . T cr
+    (44) cr -> . cr CR
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
+
   ! shift/reduce conflict for STAR resolved as shift
   ! shift/reduce conflict for DOUBLESTAR resolved as shift
-  ! shift/reduce conflict for CODE resolved as shift
+  ! shift/reduce conflict for POINT resolved as shift
   ! shift/reduce conflict for LEMI resolved as shift
   ! shift/reduce conflict for LEST resolved as shift
+  ! shift/reduce conflict for TEXT resolved as shift
     H1              reduce using rule 7 (expression -> lines .)
     H2              reduce using rule 7 (expression -> lines .)
     H3              reduce using rule 7 (expression -> lines .)
     HR              reduce using rule 7 (expression -> lines .)
+    RIST            reduce using rule 7 (expression -> lines .)
     LI              reduce using rule 7 (expression -> lines .)
     NLI             reduce using rule 7 (expression -> lines .)
+    SELI            reduce using rule 7 (expression -> lines .)
+    TRLI            reduce using rule 7 (expression -> lines .)
     $end            reduce using rule 7 (expression -> lines .)
-    CR              shift and go to state 38
-    TEXT            shift and go to state 6
-    STAR            shift and go to state 22
-    DOUBLESTAR      shift and go to state 7
-    CODE            shift and go to state 2
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
     LEMI            shift and go to state 4
     LEST            shift and go to state 1
+    CR              shift and go to state 37
+    T               shift and go to state 36
+    TEXT            shift and go to state 19
 
-  ! TEXT            [ reduce using rule 7 (expression -> lines .) ]
   ! STAR            [ reduce using rule 7 (expression -> lines .) ]
   ! DOUBLESTAR      [ reduce using rule 7 (expression -> lines .) ]
-  ! CODE            [ reduce using rule 7 (expression -> lines .) ]
+  ! POINT           [ reduce using rule 7 (expression -> lines .) ]
   ! LEMI            [ reduce using rule 7 (expression -> lines .) ]
   ! LEST            [ reduce using rule 7 (expression -> lines .) ]
+  ! TEXT            [ reduce using rule 7 (expression -> lines .) ]
 
-    factor                         shift and go to state 37
+    cr                             shift and go to state 56
+    text                           shift and go to state 6
+    factor                         shift and go to state 55
 
-state 20
+state 29
 
-    (18) expression -> ul . CR
-    (20) ul -> ul . CR li
+    (25) expression -> ul .
+    (27) ul -> ul . li
+    (31) li -> . LI factor cr
+    (32) li -> . seul
+    (29) seul -> . seul seli
+    (30) seul -> . seli
+    (33) seli -> . SELI factor cr
+    (34) seli -> . trul
+    (35) trul -> . trul trli
+    (36) trul -> . trli
+    (37) trli -> . TRLI factor cr
 
-    CR              shift and go to state 39
+  ! shift/reduce conflict for LI resolved as shift
+  ! shift/reduce conflict for SELI resolved as shift
+  ! shift/reduce conflict for TRLI resolved as shift
+    H1              reduce using rule 25 (expression -> ul .)
+    H2              reduce using rule 25 (expression -> ul .)
+    H3              reduce using rule 25 (expression -> ul .)
+    HR              reduce using rule 25 (expression -> ul .)
+    STAR            reduce using rule 25 (expression -> ul .)
+    DOUBLESTAR      reduce using rule 25 (expression -> ul .)
+    POINT           reduce using rule 25 (expression -> ul .)
+    LEMI            reduce using rule 25 (expression -> ul .)
+    LEST            reduce using rule 25 (expression -> ul .)
+    RIST            reduce using rule 25 (expression -> ul .)
+    NLI             reduce using rule 25 (expression -> ul .)
+    TEXT            reduce using rule 25 (expression -> ul .)
+    $end            reduce using rule 25 (expression -> ul .)
+    LI              shift and go to state 9
+    SELI            shift and go to state 24
+    TRLI            shift and go to state 10
 
+  ! LI              [ reduce using rule 25 (expression -> ul .) ]
+  ! SELI            [ reduce using rule 25 (expression -> ul .) ]
+  ! TRLI            [ reduce using rule 25 (expression -> ul .) ]
 
-state 21
+    seli                           shift and go to state 11
+    seul                           shift and go to state 57
+    li                             shift and go to state 58
+    trul                           shift and go to state 20
+    trli                           shift and go to state 22
+
+state 30
 
     (2) statement -> expression .
 
@@ -471,95 +1016,244 @@ state 21
     H2              reduce using rule 2 (statement -> expression .)
     H3              reduce using rule 2 (statement -> expression .)
     HR              reduce using rule 2 (statement -> expression .)
-    TEXT            reduce using rule 2 (statement -> expression .)
     STAR            reduce using rule 2 (statement -> expression .)
     DOUBLESTAR      reduce using rule 2 (statement -> expression .)
-    CODE            reduce using rule 2 (statement -> expression .)
+    POINT           reduce using rule 2 (statement -> expression .)
     LEMI            reduce using rule 2 (statement -> expression .)
     LEST            reduce using rule 2 (statement -> expression .)
+    RIST            reduce using rule 2 (statement -> expression .)
     LI              reduce using rule 2 (statement -> expression .)
     NLI             reduce using rule 2 (statement -> expression .)
+    TEXT            reduce using rule 2 (statement -> expression .)
+    SELI            reduce using rule 2 (statement -> expression .)
+    TRLI            reduce using rule 2 (statement -> expression .)
     $end            reduce using rule 2 (statement -> expression .)
 
 
-state 22
-
-    (12) factor -> STAR . TEXT STAR
-
-    TEXT            shift and go to state 40
-
-
-state 23
-
-    (16) factor -> LEST factor . RIST
-
-    RIST            shift and go to state 41
-
-
-state 24
-
-    (14) factor -> CODE TEXT . CODE
-
-    CODE            shift and go to state 42
-
-
-state 25
-
-    (12) factor -> STAR TEXT . STAR
-    (11) factor -> TEXT .
-
-    STAR            shift and go to state 43
-    CR              reduce using rule 11 (factor -> TEXT .)
-
-
-state 26
-
-    (25) li -> STAR factor .
-
-    CR              reduce using rule 25 (li -> STAR factor .)
-
-
-state 27
-
-    (15) factor -> LEMI factor . RIMI LESM factor RISM
-
-    RIMI            shift and go to state 44
-
-
-state 28
-
-    (17) expression -> HR CR .
-
-    H1              reduce using rule 17 (expression -> HR CR .)
-    H2              reduce using rule 17 (expression -> HR CR .)
-    H3              reduce using rule 17 (expression -> HR CR .)
-    HR              reduce using rule 17 (expression -> HR CR .)
-    TEXT            reduce using rule 17 (expression -> HR CR .)
-    STAR            reduce using rule 17 (expression -> HR CR .)
-    DOUBLESTAR      reduce using rule 17 (expression -> HR CR .)
-    CODE            reduce using rule 17 (expression -> HR CR .)
-    LEMI            reduce using rule 17 (expression -> HR CR .)
-    LEST            reduce using rule 17 (expression -> HR CR .)
-    LI              reduce using rule 17 (expression -> HR CR .)
-    NLI             reduce using rule 17 (expression -> HR CR .)
-    $end            reduce using rule 17 (expression -> HR CR .)
-
-
-state 29
-
-    (13) factor -> DOUBLESTAR TEXT . DOUBLESTAR
-
-    DOUBLESTAR      shift and go to state 45
-
-
-state 30
-
-    (24) li -> LI factor .
-
-    CR              reduce using rule 24 (li -> LI factor .)
-
-
 state 31
+
+    (8) expression -> block .
+    (12) block -> block . bline
+    (14) bline -> . RIST lines cr
+
+  ! shift/reduce conflict for RIST resolved as shift
+    H1              reduce using rule 8 (expression -> block .)
+    H2              reduce using rule 8 (expression -> block .)
+    H3              reduce using rule 8 (expression -> block .)
+    HR              reduce using rule 8 (expression -> block .)
+    STAR            reduce using rule 8 (expression -> block .)
+    DOUBLESTAR      reduce using rule 8 (expression -> block .)
+    POINT           reduce using rule 8 (expression -> block .)
+    LEMI            reduce using rule 8 (expression -> block .)
+    LEST            reduce using rule 8 (expression -> block .)
+    LI              reduce using rule 8 (expression -> block .)
+    NLI             reduce using rule 8 (expression -> block .)
+    TEXT            reduce using rule 8 (expression -> block .)
+    SELI            reduce using rule 8 (expression -> block .)
+    TRLI            reduce using rule 8 (expression -> block .)
+    $end            reduce using rule 8 (expression -> block .)
+    RIST            shift and go to state 21
+
+  ! RIST            [ reduce using rule 8 (expression -> block .) ]
+
+    bline                          shift and go to state 59
+
+state 32
+
+    (23) factor -> LEST factor . RIST
+
+    RIST            shift and go to state 60
+
+
+state 33
+
+    (16) factor -> STAR factor . STAR
+
+    STAR            shift and go to state 61
+
+
+state 34
+
+    (22) factor -> LEMI factor . RIMI LESM factor RISM
+
+    RIMI            shift and go to state 62
+
+
+state 35
+
+    (24) expression -> HR cr .
+    (44) cr -> cr . CR
+
+    H1              reduce using rule 24 (expression -> HR cr .)
+    H2              reduce using rule 24 (expression -> HR cr .)
+    H3              reduce using rule 24 (expression -> HR cr .)
+    HR              reduce using rule 24 (expression -> HR cr .)
+    STAR            reduce using rule 24 (expression -> HR cr .)
+    DOUBLESTAR      reduce using rule 24 (expression -> HR cr .)
+    POINT           reduce using rule 24 (expression -> HR cr .)
+    LEMI            reduce using rule 24 (expression -> HR cr .)
+    LEST            reduce using rule 24 (expression -> HR cr .)
+    RIST            reduce using rule 24 (expression -> HR cr .)
+    LI              reduce using rule 24 (expression -> HR cr .)
+    NLI             reduce using rule 24 (expression -> HR cr .)
+    TEXT            reduce using rule 24 (expression -> HR cr .)
+    SELI            reduce using rule 24 (expression -> HR cr .)
+    TRLI            reduce using rule 24 (expression -> HR cr .)
+    $end            reduce using rule 24 (expression -> HR cr .)
+    CR              shift and go to state 63
+
+
+state 36
+
+    (43) cr -> T . cr
+    (42) cr -> . CR
+    (43) cr -> . T cr
+    (44) cr -> . cr CR
+
+    CR              shift and go to state 37
+    T               shift and go to state 36
+
+    cr                             shift and go to state 64
+
+state 37
+
+    (42) cr -> CR .
+
+    CR              reduce using rule 42 (cr -> CR .)
+    H1              reduce using rule 42 (cr -> CR .)
+    H2              reduce using rule 42 (cr -> CR .)
+    H3              reduce using rule 42 (cr -> CR .)
+    HR              reduce using rule 42 (cr -> CR .)
+    STAR            reduce using rule 42 (cr -> CR .)
+    DOUBLESTAR      reduce using rule 42 (cr -> CR .)
+    POINT           reduce using rule 42 (cr -> CR .)
+    LEMI            reduce using rule 42 (cr -> CR .)
+    LEST            reduce using rule 42 (cr -> CR .)
+    RIST            reduce using rule 42 (cr -> CR .)
+    LI              reduce using rule 42 (cr -> CR .)
+    NLI             reduce using rule 42 (cr -> CR .)
+    TEXT            reduce using rule 42 (cr -> CR .)
+    SELI            reduce using rule 42 (cr -> CR .)
+    TRLI            reduce using rule 42 (cr -> CR .)
+    $end            reduce using rule 42 (cr -> CR .)
+    T               reduce using rule 42 (cr -> CR .)
+
+
+state 38
+
+    (20) text -> text NUMBER .
+
+    NUMBER          reduce using rule 20 (text -> text NUMBER .)
+    TEXT            reduce using rule 20 (text -> text NUMBER .)
+    CR              reduce using rule 20 (text -> text NUMBER .)
+    T               reduce using rule 20 (text -> text NUMBER .)
+    STAR            reduce using rule 20 (text -> text NUMBER .)
+    DOUBLESTAR      reduce using rule 20 (text -> text NUMBER .)
+    POINT           reduce using rule 20 (text -> text NUMBER .)
+    LEMI            reduce using rule 20 (text -> text NUMBER .)
+    LEST            reduce using rule 20 (text -> text NUMBER .)
+    H1              reduce using rule 20 (text -> text NUMBER .)
+    H2              reduce using rule 20 (text -> text NUMBER .)
+    H3              reduce using rule 20 (text -> text NUMBER .)
+    HR              reduce using rule 20 (text -> text NUMBER .)
+    RIST            reduce using rule 20 (text -> text NUMBER .)
+    LI              reduce using rule 20 (text -> text NUMBER .)
+    NLI             reduce using rule 20 (text -> text NUMBER .)
+    SELI            reduce using rule 20 (text -> text NUMBER .)
+    TRLI            reduce using rule 20 (text -> text NUMBER .)
+    $end            reduce using rule 20 (text -> text NUMBER .)
+    RISM            reduce using rule 20 (text -> text NUMBER .)
+    RIMI            reduce using rule 20 (text -> text NUMBER .)
+
+
+state 39
+
+    (21) text -> text TEXT .
+
+    NUMBER          reduce using rule 21 (text -> text TEXT .)
+    TEXT            reduce using rule 21 (text -> text TEXT .)
+    CR              reduce using rule 21 (text -> text TEXT .)
+    T               reduce using rule 21 (text -> text TEXT .)
+    STAR            reduce using rule 21 (text -> text TEXT .)
+    DOUBLESTAR      reduce using rule 21 (text -> text TEXT .)
+    POINT           reduce using rule 21 (text -> text TEXT .)
+    LEMI            reduce using rule 21 (text -> text TEXT .)
+    LEST            reduce using rule 21 (text -> text TEXT .)
+    H1              reduce using rule 21 (text -> text TEXT .)
+    H2              reduce using rule 21 (text -> text TEXT .)
+    H3              reduce using rule 21 (text -> text TEXT .)
+    HR              reduce using rule 21 (text -> text TEXT .)
+    RIST            reduce using rule 21 (text -> text TEXT .)
+    LI              reduce using rule 21 (text -> text TEXT .)
+    NLI             reduce using rule 21 (text -> text TEXT .)
+    SELI            reduce using rule 21 (text -> text TEXT .)
+    TRLI            reduce using rule 21 (text -> text TEXT .)
+    $end            reduce using rule 21 (text -> text TEXT .)
+    RISM            reduce using rule 21 (text -> text TEXT .)
+    RIMI            reduce using rule 21 (text -> text TEXT .)
+
+
+state 40
+
+    (17) factor -> DOUBLESTAR factor . DOUBLESTAR
+
+    DOUBLESTAR      shift and go to state 65
+
+
+state 41
+
+    (31) li -> LI factor . cr
+    (42) cr -> . CR
+    (43) cr -> . T cr
+    (44) cr -> . cr CR
+
+    CR              shift and go to state 37
+    T               shift and go to state 36
+
+    cr                             shift and go to state 66
+
+state 42
+
+    (37) trli -> TRLI factor . cr
+    (42) cr -> . CR
+    (43) cr -> . T cr
+    (44) cr -> . cr CR
+
+    CR              shift and go to state 37
+    T               shift and go to state 36
+
+    cr                             shift and go to state 67
+
+state 43
+
+    (18) factor -> POINT factor . POINT
+
+    POINT           shift and go to state 68
+
+
+state 44
+
+    (29) seul -> seul seli .
+
+    SELI            reduce using rule 29 (seul -> seul seli .)
+    TRLI            reduce using rule 29 (seul -> seul seli .)
+    LI              reduce using rule 29 (seul -> seul seli .)
+    H1              reduce using rule 29 (seul -> seul seli .)
+    H2              reduce using rule 29 (seul -> seul seli .)
+    H3              reduce using rule 29 (seul -> seul seli .)
+    HR              reduce using rule 29 (seul -> seul seli .)
+    STAR            reduce using rule 29 (seul -> seul seli .)
+    DOUBLESTAR      reduce using rule 29 (seul -> seul seli .)
+    POINT           reduce using rule 29 (seul -> seul seli .)
+    LEMI            reduce using rule 29 (seul -> seul seli .)
+    LEST            reduce using rule 29 (seul -> seul seli .)
+    RIST            reduce using rule 29 (seul -> seul seli .)
+    NLI             reduce using rule 29 (seul -> seul seli .)
+    TEXT            reduce using rule 29 (seul -> seul seli .)
+    $end            reduce using rule 29 (seul -> seul seli .)
+
+
+state 45
 
     (3) statement -> statement expression .
 
@@ -567,391 +1261,778 @@ state 31
     H2              reduce using rule 3 (statement -> statement expression .)
     H3              reduce using rule 3 (statement -> statement expression .)
     HR              reduce using rule 3 (statement -> statement expression .)
-    TEXT            reduce using rule 3 (statement -> statement expression .)
     STAR            reduce using rule 3 (statement -> statement expression .)
     DOUBLESTAR      reduce using rule 3 (statement -> statement expression .)
-    CODE            reduce using rule 3 (statement -> statement expression .)
+    POINT           reduce using rule 3 (statement -> statement expression .)
     LEMI            reduce using rule 3 (statement -> statement expression .)
     LEST            reduce using rule 3 (statement -> statement expression .)
+    RIST            reduce using rule 3 (statement -> statement expression .)
     LI              reduce using rule 3 (statement -> statement expression .)
     NLI             reduce using rule 3 (statement -> statement expression .)
+    TEXT            reduce using rule 3 (statement -> statement expression .)
+    SELI            reduce using rule 3 (statement -> statement expression .)
+    TRLI            reduce using rule 3 (statement -> statement expression .)
     $end            reduce using rule 3 (statement -> statement expression .)
-
-
-state 32
-
-    (26) nli -> NLI factor .
-
-    CR              reduce using rule 26 (nli -> NLI factor .)
-
-
-state 33
-
-    (19) expression -> ol CR .
-    (22) ol -> ol CR . nli
-    (26) nli -> . NLI factor
-
-  ! shift/reduce conflict for NLI resolved as shift
-    H1              reduce using rule 19 (expression -> ol CR .)
-    H2              reduce using rule 19 (expression -> ol CR .)
-    H3              reduce using rule 19 (expression -> ol CR .)
-    HR              reduce using rule 19 (expression -> ol CR .)
-    TEXT            reduce using rule 19 (expression -> ol CR .)
-    STAR            reduce using rule 19 (expression -> ol CR .)
-    DOUBLESTAR      reduce using rule 19 (expression -> ol CR .)
-    CODE            reduce using rule 19 (expression -> ol CR .)
-    LEMI            reduce using rule 19 (expression -> ol CR .)
-    LEST            reduce using rule 19 (expression -> ol CR .)
-    LI              reduce using rule 19 (expression -> ol CR .)
-    $end            reduce using rule 19 (expression -> ol CR .)
-    NLI             shift and go to state 13
-
-  ! NLI             [ reduce using rule 19 (expression -> ol CR .) ]
-
-    nli                            shift and go to state 46
-
-state 34
-
-    (5) expression -> H2 factor . CR
-
-    CR              shift and go to state 47
-
-
-state 35
-
-    (6) expression -> H3 factor . CR
-
-    CR              shift and go to state 48
-
-
-state 36
-
-    (4) expression -> H1 factor . CR
-
-    CR              shift and go to state 49
-
-
-state 37
-
-    (8) lines -> lines factor .
-
-    CR              reduce using rule 8 (lines -> lines factor .)
-    TEXT            reduce using rule 8 (lines -> lines factor .)
-    STAR            reduce using rule 8 (lines -> lines factor .)
-    DOUBLESTAR      reduce using rule 8 (lines -> lines factor .)
-    CODE            reduce using rule 8 (lines -> lines factor .)
-    LEMI            reduce using rule 8 (lines -> lines factor .)
-    LEST            reduce using rule 8 (lines -> lines factor .)
-    H1              reduce using rule 8 (lines -> lines factor .)
-    H2              reduce using rule 8 (lines -> lines factor .)
-    H3              reduce using rule 8 (lines -> lines factor .)
-    HR              reduce using rule 8 (lines -> lines factor .)
-    LI              reduce using rule 8 (lines -> lines factor .)
-    NLI             reduce using rule 8 (lines -> lines factor .)
-    $end            reduce using rule 8 (lines -> lines factor .)
-
-
-state 38
-
-    (9) lines -> lines CR .
-
-    CR              reduce using rule 9 (lines -> lines CR .)
-    TEXT            reduce using rule 9 (lines -> lines CR .)
-    STAR            reduce using rule 9 (lines -> lines CR .)
-    DOUBLESTAR      reduce using rule 9 (lines -> lines CR .)
-    CODE            reduce using rule 9 (lines -> lines CR .)
-    LEMI            reduce using rule 9 (lines -> lines CR .)
-    LEST            reduce using rule 9 (lines -> lines CR .)
-    H1              reduce using rule 9 (lines -> lines CR .)
-    H2              reduce using rule 9 (lines -> lines CR .)
-    H3              reduce using rule 9 (lines -> lines CR .)
-    HR              reduce using rule 9 (lines -> lines CR .)
-    LI              reduce using rule 9 (lines -> lines CR .)
-    NLI             reduce using rule 9 (lines -> lines CR .)
-    $end            reduce using rule 9 (lines -> lines CR .)
-
-
-state 39
-
-    (18) expression -> ul CR .
-    (20) ul -> ul CR . li
-    (24) li -> . LI factor
-    (25) li -> . STAR factor
-
-  ! shift/reduce conflict for LI resolved as shift
-  ! shift/reduce conflict for STAR resolved as shift
-    H1              reduce using rule 18 (expression -> ul CR .)
-    H2              reduce using rule 18 (expression -> ul CR .)
-    H3              reduce using rule 18 (expression -> ul CR .)
-    HR              reduce using rule 18 (expression -> ul CR .)
-    TEXT            reduce using rule 18 (expression -> ul CR .)
-    DOUBLESTAR      reduce using rule 18 (expression -> ul CR .)
-    CODE            reduce using rule 18 (expression -> ul CR .)
-    LEMI            reduce using rule 18 (expression -> ul CR .)
-    LEST            reduce using rule 18 (expression -> ul CR .)
-    NLI             reduce using rule 18 (expression -> ul CR .)
-    $end            reduce using rule 18 (expression -> ul CR .)
-    LI              shift and go to state 9
-    STAR            shift and go to state 50
-
-  ! STAR            [ reduce using rule 18 (expression -> ul CR .) ]
-  ! LI              [ reduce using rule 18 (expression -> ul CR .) ]
-
-    li                             shift and go to state 51
-
-state 40
-
-    (12) factor -> STAR TEXT . STAR
-
-    STAR            shift and go to state 43
-
-
-state 41
-
-    (16) factor -> LEST factor RIST .
-
-    CR              reduce using rule 16 (factor -> LEST factor RIST .)
-    RIMI            reduce using rule 16 (factor -> LEST factor RIST .)
-    TEXT            reduce using rule 16 (factor -> LEST factor RIST .)
-    STAR            reduce using rule 16 (factor -> LEST factor RIST .)
-    DOUBLESTAR      reduce using rule 16 (factor -> LEST factor RIST .)
-    CODE            reduce using rule 16 (factor -> LEST factor RIST .)
-    LEMI            reduce using rule 16 (factor -> LEST factor RIST .)
-    LEST            reduce using rule 16 (factor -> LEST factor RIST .)
-    H1              reduce using rule 16 (factor -> LEST factor RIST .)
-    H2              reduce using rule 16 (factor -> LEST factor RIST .)
-    H3              reduce using rule 16 (factor -> LEST factor RIST .)
-    HR              reduce using rule 16 (factor -> LEST factor RIST .)
-    LI              reduce using rule 16 (factor -> LEST factor RIST .)
-    NLI             reduce using rule 16 (factor -> LEST factor RIST .)
-    $end            reduce using rule 16 (factor -> LEST factor RIST .)
-    RIST            reduce using rule 16 (factor -> LEST factor RIST .)
-    RISM            reduce using rule 16 (factor -> LEST factor RIST .)
-
-
-state 42
-
-    (14) factor -> CODE TEXT CODE .
-
-    CR              reduce using rule 14 (factor -> CODE TEXT CODE .)
-    RIMI            reduce using rule 14 (factor -> CODE TEXT CODE .)
-    TEXT            reduce using rule 14 (factor -> CODE TEXT CODE .)
-    STAR            reduce using rule 14 (factor -> CODE TEXT CODE .)
-    DOUBLESTAR      reduce using rule 14 (factor -> CODE TEXT CODE .)
-    CODE            reduce using rule 14 (factor -> CODE TEXT CODE .)
-    LEMI            reduce using rule 14 (factor -> CODE TEXT CODE .)
-    LEST            reduce using rule 14 (factor -> CODE TEXT CODE .)
-    H1              reduce using rule 14 (factor -> CODE TEXT CODE .)
-    H2              reduce using rule 14 (factor -> CODE TEXT CODE .)
-    H3              reduce using rule 14 (factor -> CODE TEXT CODE .)
-    HR              reduce using rule 14 (factor -> CODE TEXT CODE .)
-    LI              reduce using rule 14 (factor -> CODE TEXT CODE .)
-    NLI             reduce using rule 14 (factor -> CODE TEXT CODE .)
-    $end            reduce using rule 14 (factor -> CODE TEXT CODE .)
-    RIST            reduce using rule 14 (factor -> CODE TEXT CODE .)
-    RISM            reduce using rule 14 (factor -> CODE TEXT CODE .)
-
-
-state 43
-
-    (12) factor -> STAR TEXT STAR .
-
-    CR              reduce using rule 12 (factor -> STAR TEXT STAR .)
-    RIMI            reduce using rule 12 (factor -> STAR TEXT STAR .)
-    TEXT            reduce using rule 12 (factor -> STAR TEXT STAR .)
-    STAR            reduce using rule 12 (factor -> STAR TEXT STAR .)
-    DOUBLESTAR      reduce using rule 12 (factor -> STAR TEXT STAR .)
-    CODE            reduce using rule 12 (factor -> STAR TEXT STAR .)
-    LEMI            reduce using rule 12 (factor -> STAR TEXT STAR .)
-    LEST            reduce using rule 12 (factor -> STAR TEXT STAR .)
-    H1              reduce using rule 12 (factor -> STAR TEXT STAR .)
-    H2              reduce using rule 12 (factor -> STAR TEXT STAR .)
-    H3              reduce using rule 12 (factor -> STAR TEXT STAR .)
-    HR              reduce using rule 12 (factor -> STAR TEXT STAR .)
-    LI              reduce using rule 12 (factor -> STAR TEXT STAR .)
-    NLI             reduce using rule 12 (factor -> STAR TEXT STAR .)
-    $end            reduce using rule 12 (factor -> STAR TEXT STAR .)
-    RIST            reduce using rule 12 (factor -> STAR TEXT STAR .)
-    RISM            reduce using rule 12 (factor -> STAR TEXT STAR .)
-
-
-state 44
-
-    (15) factor -> LEMI factor RIMI . LESM factor RISM
-
-    LESM            shift and go to state 52
-
-
-state 45
-
-    (13) factor -> DOUBLESTAR TEXT DOUBLESTAR .
-
-    CR              reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    RIMI            reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    TEXT            reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    STAR            reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    DOUBLESTAR      reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    CODE            reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    LEMI            reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    LEST            reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    H1              reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    H2              reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    H3              reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    HR              reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    LI              reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    NLI             reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    $end            reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    RIST            reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
-    RISM            reduce using rule 13 (factor -> DOUBLESTAR TEXT DOUBLESTAR .)
 
 
 state 46
 
-    (22) ol -> ol CR nli .
+    (40) nli -> NLI factor . cr
+    (42) cr -> . CR
+    (43) cr -> . T cr
+    (44) cr -> . cr CR
 
-    CR              reduce using rule 22 (ol -> ol CR nli .)
+    CR              shift and go to state 37
+    T               shift and go to state 36
 
+    cr                             shift and go to state 69
 
 state 47
 
-    (5) expression -> H2 factor CR .
+    (35) trul -> trul trli .
 
-    H1              reduce using rule 5 (expression -> H2 factor CR .)
-    H2              reduce using rule 5 (expression -> H2 factor CR .)
-    H3              reduce using rule 5 (expression -> H2 factor CR .)
-    HR              reduce using rule 5 (expression -> H2 factor CR .)
-    TEXT            reduce using rule 5 (expression -> H2 factor CR .)
-    STAR            reduce using rule 5 (expression -> H2 factor CR .)
-    DOUBLESTAR      reduce using rule 5 (expression -> H2 factor CR .)
-    CODE            reduce using rule 5 (expression -> H2 factor CR .)
-    LEMI            reduce using rule 5 (expression -> H2 factor CR .)
-    LEST            reduce using rule 5 (expression -> H2 factor CR .)
-    LI              reduce using rule 5 (expression -> H2 factor CR .)
-    NLI             reduce using rule 5 (expression -> H2 factor CR .)
-    $end            reduce using rule 5 (expression -> H2 factor CR .)
+    TRLI            reduce using rule 35 (trul -> trul trli .)
+    SELI            reduce using rule 35 (trul -> trul trli .)
+    LI              reduce using rule 35 (trul -> trul trli .)
+    H1              reduce using rule 35 (trul -> trul trli .)
+    H2              reduce using rule 35 (trul -> trul trli .)
+    H3              reduce using rule 35 (trul -> trul trli .)
+    HR              reduce using rule 35 (trul -> trul trli .)
+    STAR            reduce using rule 35 (trul -> trul trli .)
+    DOUBLESTAR      reduce using rule 35 (trul -> trul trli .)
+    POINT           reduce using rule 35 (trul -> trul trli .)
+    LEMI            reduce using rule 35 (trul -> trul trli .)
+    LEST            reduce using rule 35 (trul -> trul trli .)
+    RIST            reduce using rule 35 (trul -> trul trli .)
+    NLI             reduce using rule 35 (trul -> trul trli .)
+    TEXT            reduce using rule 35 (trul -> trul trli .)
+    $end            reduce using rule 35 (trul -> trul trli .)
 
 
 state 48
 
-    (6) expression -> H3 factor CR .
+    (14) bline -> RIST lines . cr
+    (9) lines -> lines . factor
+    (10) lines -> lines . cr
+    (42) cr -> . CR
+    (43) cr -> . T cr
+    (44) cr -> . cr CR
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
 
-    H1              reduce using rule 6 (expression -> H3 factor CR .)
-    H2              reduce using rule 6 (expression -> H3 factor CR .)
-    H3              reduce using rule 6 (expression -> H3 factor CR .)
-    HR              reduce using rule 6 (expression -> H3 factor CR .)
-    TEXT            reduce using rule 6 (expression -> H3 factor CR .)
-    STAR            reduce using rule 6 (expression -> H3 factor CR .)
-    DOUBLESTAR      reduce using rule 6 (expression -> H3 factor CR .)
-    CODE            reduce using rule 6 (expression -> H3 factor CR .)
-    LEMI            reduce using rule 6 (expression -> H3 factor CR .)
-    LEST            reduce using rule 6 (expression -> H3 factor CR .)
-    LI              reduce using rule 6 (expression -> H3 factor CR .)
-    NLI             reduce using rule 6 (expression -> H3 factor CR .)
-    $end            reduce using rule 6 (expression -> H3 factor CR .)
+    CR              shift and go to state 37
+    T               shift and go to state 36
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
+    LEMI            shift and go to state 4
+    LEST            shift and go to state 1
+    TEXT            shift and go to state 19
 
+    cr                             shift and go to state 70
+    text                           shift and go to state 6
+    factor                         shift and go to state 55
 
 state 49
 
-    (4) expression -> H1 factor CR .
+    (41) nli -> seul .
+    (29) seul -> seul . seli
+    (33) seli -> . SELI factor cr
+    (34) seli -> . trul
+    (35) trul -> . trul trli
+    (36) trul -> . trli
+    (37) trli -> . TRLI factor cr
 
-    H1              reduce using rule 4 (expression -> H1 factor CR .)
-    H2              reduce using rule 4 (expression -> H1 factor CR .)
-    H3              reduce using rule 4 (expression -> H1 factor CR .)
-    HR              reduce using rule 4 (expression -> H1 factor CR .)
-    TEXT            reduce using rule 4 (expression -> H1 factor CR .)
-    STAR            reduce using rule 4 (expression -> H1 factor CR .)
-    DOUBLESTAR      reduce using rule 4 (expression -> H1 factor CR .)
-    CODE            reduce using rule 4 (expression -> H1 factor CR .)
-    LEMI            reduce using rule 4 (expression -> H1 factor CR .)
-    LEST            reduce using rule 4 (expression -> H1 factor CR .)
-    LI              reduce using rule 4 (expression -> H1 factor CR .)
-    NLI             reduce using rule 4 (expression -> H1 factor CR .)
-    $end            reduce using rule 4 (expression -> H1 factor CR .)
+  ! shift/reduce conflict for SELI resolved as shift
+  ! shift/reduce conflict for TRLI resolved as shift
+    NLI             reduce using rule 41 (nli -> seul .)
+    H1              reduce using rule 41 (nli -> seul .)
+    H2              reduce using rule 41 (nli -> seul .)
+    H3              reduce using rule 41 (nli -> seul .)
+    HR              reduce using rule 41 (nli -> seul .)
+    STAR            reduce using rule 41 (nli -> seul .)
+    DOUBLESTAR      reduce using rule 41 (nli -> seul .)
+    POINT           reduce using rule 41 (nli -> seul .)
+    LEMI            reduce using rule 41 (nli -> seul .)
+    LEST            reduce using rule 41 (nli -> seul .)
+    RIST            reduce using rule 41 (nli -> seul .)
+    LI              reduce using rule 41 (nli -> seul .)
+    TEXT            reduce using rule 41 (nli -> seul .)
+    $end            reduce using rule 41 (nli -> seul .)
+    SELI            shift and go to state 24
+    TRLI            shift and go to state 10
 
+  ! SELI            [ reduce using rule 41 (nli -> seul .) ]
+  ! TRLI            [ reduce using rule 41 (nli -> seul .) ]
+
+    seli                           shift and go to state 44
+    trul                           shift and go to state 20
+    trli                           shift and go to state 22
 
 state 50
 
-    (25) li -> STAR . factor
-    (11) factor -> . TEXT
-    (12) factor -> . STAR TEXT STAR
-    (13) factor -> . DOUBLESTAR TEXT DOUBLESTAR
-    (14) factor -> . CODE TEXT CODE
-    (15) factor -> . LEMI factor RIMI LESM factor RISM
-    (16) factor -> . LEST factor RIST
+    (38) ol -> ol nli .
 
-    TEXT            shift and go to state 6
-    STAR            shift and go to state 22
-    DOUBLESTAR      shift and go to state 7
-    CODE            shift and go to state 2
-    LEMI            shift and go to state 4
-    LEST            shift and go to state 1
+    NLI             reduce using rule 38 (ol -> ol nli .)
+    SELI            reduce using rule 38 (ol -> ol nli .)
+    TRLI            reduce using rule 38 (ol -> ol nli .)
+    H1              reduce using rule 38 (ol -> ol nli .)
+    H2              reduce using rule 38 (ol -> ol nli .)
+    H3              reduce using rule 38 (ol -> ol nli .)
+    HR              reduce using rule 38 (ol -> ol nli .)
+    STAR            reduce using rule 38 (ol -> ol nli .)
+    DOUBLESTAR      reduce using rule 38 (ol -> ol nli .)
+    POINT           reduce using rule 38 (ol -> ol nli .)
+    LEMI            reduce using rule 38 (ol -> ol nli .)
+    LEST            reduce using rule 38 (ol -> ol nli .)
+    RIST            reduce using rule 38 (ol -> ol nli .)
+    LI              reduce using rule 38 (ol -> ol nli .)
+    TEXT            reduce using rule 38 (ol -> ol nli .)
+    $end            reduce using rule 38 (ol -> ol nli .)
 
-    factor                         shift and go to state 26
 
 state 51
 
-    (20) ul -> ul CR li .
+    (33) seli -> SELI factor . cr
+    (42) cr -> . CR
+    (43) cr -> . T cr
+    (44) cr -> . cr CR
 
-    CR              reduce using rule 20 (ul -> ul CR li .)
+    CR              shift and go to state 37
+    T               shift and go to state 36
 
+    cr                             shift and go to state 71
 
 state 52
 
-    (15) factor -> LEMI factor RIMI LESM . factor RISM
-    (11) factor -> . TEXT
-    (12) factor -> . STAR TEXT STAR
-    (13) factor -> . DOUBLESTAR TEXT DOUBLESTAR
-    (14) factor -> . CODE TEXT CODE
-    (15) factor -> . LEMI factor RIMI LESM factor RISM
-    (16) factor -> . LEST factor RIST
+    (5) expression -> H2 factor . cr
+    (42) cr -> . CR
+    (43) cr -> . T cr
+    (44) cr -> . cr CR
 
-    TEXT            shift and go to state 6
-    STAR            shift and go to state 22
-    DOUBLESTAR      shift and go to state 7
-    CODE            shift and go to state 2
-    LEMI            shift and go to state 4
-    LEST            shift and go to state 1
+    CR              shift and go to state 37
+    T               shift and go to state 36
 
-    factor                         shift and go to state 53
+    cr                             shift and go to state 72
 
 state 53
 
-    (15) factor -> LEMI factor RIMI LESM factor . RISM
+    (6) expression -> H3 factor . cr
+    (42) cr -> . CR
+    (43) cr -> . T cr
+    (44) cr -> . cr CR
 
-    RISM            shift and go to state 54
+    CR              shift and go to state 37
+    T               shift and go to state 36
 
+    cr                             shift and go to state 73
 
 state 54
 
-    (15) factor -> LEMI factor RIMI LESM factor RISM .
+    (4) expression -> H1 factor . cr
+    (42) cr -> . CR
+    (43) cr -> . T cr
+    (44) cr -> . cr CR
 
-    CR              reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    RIMI            reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    TEXT            reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    STAR            reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    DOUBLESTAR      reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    CODE            reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    LEMI            reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    LEST            reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    H1              reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    H2              reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    H3              reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    HR              reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    LI              reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    NLI             reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    $end            reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    RIST            reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
-    RISM            reduce using rule 15 (factor -> LEMI factor RIMI LESM factor RISM .)
+    CR              shift and go to state 37
+    T               shift and go to state 36
+
+    cr                             shift and go to state 74
+
+state 55
+
+    (9) lines -> lines factor .
+
+    STAR            reduce using rule 9 (lines -> lines factor .)
+    DOUBLESTAR      reduce using rule 9 (lines -> lines factor .)
+    POINT           reduce using rule 9 (lines -> lines factor .)
+    LEMI            reduce using rule 9 (lines -> lines factor .)
+    LEST            reduce using rule 9 (lines -> lines factor .)
+    CR              reduce using rule 9 (lines -> lines factor .)
+    T               reduce using rule 9 (lines -> lines factor .)
+    TEXT            reduce using rule 9 (lines -> lines factor .)
+    H1              reduce using rule 9 (lines -> lines factor .)
+    H2              reduce using rule 9 (lines -> lines factor .)
+    H3              reduce using rule 9 (lines -> lines factor .)
+    HR              reduce using rule 9 (lines -> lines factor .)
+    RIST            reduce using rule 9 (lines -> lines factor .)
+    LI              reduce using rule 9 (lines -> lines factor .)
+    NLI             reduce using rule 9 (lines -> lines factor .)
+    SELI            reduce using rule 9 (lines -> lines factor .)
+    TRLI            reduce using rule 9 (lines -> lines factor .)
+    $end            reduce using rule 9 (lines -> lines factor .)
+
+
+state 56
+
+    (10) lines -> lines cr .
+    (44) cr -> cr . CR
+
+  ! shift/reduce conflict for CR resolved as shift
+    STAR            reduce using rule 10 (lines -> lines cr .)
+    DOUBLESTAR      reduce using rule 10 (lines -> lines cr .)
+    POINT           reduce using rule 10 (lines -> lines cr .)
+    LEMI            reduce using rule 10 (lines -> lines cr .)
+    LEST            reduce using rule 10 (lines -> lines cr .)
+    T               reduce using rule 10 (lines -> lines cr .)
+    TEXT            reduce using rule 10 (lines -> lines cr .)
+    H1              reduce using rule 10 (lines -> lines cr .)
+    H2              reduce using rule 10 (lines -> lines cr .)
+    H3              reduce using rule 10 (lines -> lines cr .)
+    HR              reduce using rule 10 (lines -> lines cr .)
+    RIST            reduce using rule 10 (lines -> lines cr .)
+    LI              reduce using rule 10 (lines -> lines cr .)
+    NLI             reduce using rule 10 (lines -> lines cr .)
+    SELI            reduce using rule 10 (lines -> lines cr .)
+    TRLI            reduce using rule 10 (lines -> lines cr .)
+    $end            reduce using rule 10 (lines -> lines cr .)
+    CR              shift and go to state 63
+
+  ! CR              [ reduce using rule 10 (lines -> lines cr .) ]
+
+
+state 57
+
+    (32) li -> seul .
+    (29) seul -> seul . seli
+    (33) seli -> . SELI factor cr
+    (34) seli -> . trul
+    (35) trul -> . trul trli
+    (36) trul -> . trli
+    (37) trli -> . TRLI factor cr
+
+  ! shift/reduce conflict for SELI resolved as shift
+  ! shift/reduce conflict for TRLI resolved as shift
+    LI              reduce using rule 32 (li -> seul .)
+    H1              reduce using rule 32 (li -> seul .)
+    H2              reduce using rule 32 (li -> seul .)
+    H3              reduce using rule 32 (li -> seul .)
+    HR              reduce using rule 32 (li -> seul .)
+    STAR            reduce using rule 32 (li -> seul .)
+    DOUBLESTAR      reduce using rule 32 (li -> seul .)
+    POINT           reduce using rule 32 (li -> seul .)
+    LEMI            reduce using rule 32 (li -> seul .)
+    LEST            reduce using rule 32 (li -> seul .)
+    RIST            reduce using rule 32 (li -> seul .)
+    NLI             reduce using rule 32 (li -> seul .)
+    TEXT            reduce using rule 32 (li -> seul .)
+    $end            reduce using rule 32 (li -> seul .)
+    SELI            shift and go to state 24
+    TRLI            shift and go to state 10
+
+  ! SELI            [ reduce using rule 32 (li -> seul .) ]
+  ! TRLI            [ reduce using rule 32 (li -> seul .) ]
+
+    seli                           shift and go to state 44
+    trul                           shift and go to state 20
+    trli                           shift and go to state 22
+
+state 58
+
+    (27) ul -> ul li .
+
+    LI              reduce using rule 27 (ul -> ul li .)
+    SELI            reduce using rule 27 (ul -> ul li .)
+    TRLI            reduce using rule 27 (ul -> ul li .)
+    H1              reduce using rule 27 (ul -> ul li .)
+    H2              reduce using rule 27 (ul -> ul li .)
+    H3              reduce using rule 27 (ul -> ul li .)
+    HR              reduce using rule 27 (ul -> ul li .)
+    STAR            reduce using rule 27 (ul -> ul li .)
+    DOUBLESTAR      reduce using rule 27 (ul -> ul li .)
+    POINT           reduce using rule 27 (ul -> ul li .)
+    LEMI            reduce using rule 27 (ul -> ul li .)
+    LEST            reduce using rule 27 (ul -> ul li .)
+    RIST            reduce using rule 27 (ul -> ul li .)
+    NLI             reduce using rule 27 (ul -> ul li .)
+    TEXT            reduce using rule 27 (ul -> ul li .)
+    $end            reduce using rule 27 (ul -> ul li .)
+
+
+state 59
+
+    (12) block -> block bline .
+
+    RIST            reduce using rule 12 (block -> block bline .)
+    H1              reduce using rule 12 (block -> block bline .)
+    H2              reduce using rule 12 (block -> block bline .)
+    H3              reduce using rule 12 (block -> block bline .)
+    HR              reduce using rule 12 (block -> block bline .)
+    STAR            reduce using rule 12 (block -> block bline .)
+    DOUBLESTAR      reduce using rule 12 (block -> block bline .)
+    POINT           reduce using rule 12 (block -> block bline .)
+    LEMI            reduce using rule 12 (block -> block bline .)
+    LEST            reduce using rule 12 (block -> block bline .)
+    LI              reduce using rule 12 (block -> block bline .)
+    NLI             reduce using rule 12 (block -> block bline .)
+    TEXT            reduce using rule 12 (block -> block bline .)
+    SELI            reduce using rule 12 (block -> block bline .)
+    TRLI            reduce using rule 12 (block -> block bline .)
+    $end            reduce using rule 12 (block -> block bline .)
+
+
+state 60
+
+    (23) factor -> LEST factor RIST .
+
+    RIMI            reduce using rule 23 (factor -> LEST factor RIST .)
+    CR              reduce using rule 23 (factor -> LEST factor RIST .)
+    T               reduce using rule 23 (factor -> LEST factor RIST .)
+    STAR            reduce using rule 23 (factor -> LEST factor RIST .)
+    DOUBLESTAR      reduce using rule 23 (factor -> LEST factor RIST .)
+    POINT           reduce using rule 23 (factor -> LEST factor RIST .)
+    LEMI            reduce using rule 23 (factor -> LEST factor RIST .)
+    LEST            reduce using rule 23 (factor -> LEST factor RIST .)
+    TEXT            reduce using rule 23 (factor -> LEST factor RIST .)
+    H1              reduce using rule 23 (factor -> LEST factor RIST .)
+    H2              reduce using rule 23 (factor -> LEST factor RIST .)
+    H3              reduce using rule 23 (factor -> LEST factor RIST .)
+    HR              reduce using rule 23 (factor -> LEST factor RIST .)
+    RIST            reduce using rule 23 (factor -> LEST factor RIST .)
+    LI              reduce using rule 23 (factor -> LEST factor RIST .)
+    NLI             reduce using rule 23 (factor -> LEST factor RIST .)
+    SELI            reduce using rule 23 (factor -> LEST factor RIST .)
+    TRLI            reduce using rule 23 (factor -> LEST factor RIST .)
+    $end            reduce using rule 23 (factor -> LEST factor RIST .)
+    RISM            reduce using rule 23 (factor -> LEST factor RIST .)
+
+
+state 61
+
+    (16) factor -> STAR factor STAR .
+
+    RIMI            reduce using rule 16 (factor -> STAR factor STAR .)
+    CR              reduce using rule 16 (factor -> STAR factor STAR .)
+    T               reduce using rule 16 (factor -> STAR factor STAR .)
+    STAR            reduce using rule 16 (factor -> STAR factor STAR .)
+    DOUBLESTAR      reduce using rule 16 (factor -> STAR factor STAR .)
+    POINT           reduce using rule 16 (factor -> STAR factor STAR .)
+    LEMI            reduce using rule 16 (factor -> STAR factor STAR .)
+    LEST            reduce using rule 16 (factor -> STAR factor STAR .)
+    TEXT            reduce using rule 16 (factor -> STAR factor STAR .)
+    H1              reduce using rule 16 (factor -> STAR factor STAR .)
+    H2              reduce using rule 16 (factor -> STAR factor STAR .)
+    H3              reduce using rule 16 (factor -> STAR factor STAR .)
+    HR              reduce using rule 16 (factor -> STAR factor STAR .)
+    RIST            reduce using rule 16 (factor -> STAR factor STAR .)
+    LI              reduce using rule 16 (factor -> STAR factor STAR .)
+    NLI             reduce using rule 16 (factor -> STAR factor STAR .)
+    SELI            reduce using rule 16 (factor -> STAR factor STAR .)
+    TRLI            reduce using rule 16 (factor -> STAR factor STAR .)
+    $end            reduce using rule 16 (factor -> STAR factor STAR .)
+    RISM            reduce using rule 16 (factor -> STAR factor STAR .)
+
+
+state 62
+
+    (22) factor -> LEMI factor RIMI . LESM factor RISM
+
+    LESM            shift and go to state 75
+
+
+state 63
+
+    (44) cr -> cr CR .
+
+    CR              reduce using rule 44 (cr -> cr CR .)
+    H1              reduce using rule 44 (cr -> cr CR .)
+    H2              reduce using rule 44 (cr -> cr CR .)
+    H3              reduce using rule 44 (cr -> cr CR .)
+    HR              reduce using rule 44 (cr -> cr CR .)
+    STAR            reduce using rule 44 (cr -> cr CR .)
+    DOUBLESTAR      reduce using rule 44 (cr -> cr CR .)
+    POINT           reduce using rule 44 (cr -> cr CR .)
+    LEMI            reduce using rule 44 (cr -> cr CR .)
+    LEST            reduce using rule 44 (cr -> cr CR .)
+    RIST            reduce using rule 44 (cr -> cr CR .)
+    LI              reduce using rule 44 (cr -> cr CR .)
+    NLI             reduce using rule 44 (cr -> cr CR .)
+    TEXT            reduce using rule 44 (cr -> cr CR .)
+    SELI            reduce using rule 44 (cr -> cr CR .)
+    TRLI            reduce using rule 44 (cr -> cr CR .)
+    $end            reduce using rule 44 (cr -> cr CR .)
+    T               reduce using rule 44 (cr -> cr CR .)
+
+
+state 64
+
+    (43) cr -> T cr .
+    (44) cr -> cr . CR
+
+  ! shift/reduce conflict for CR resolved as shift
+    H1              reduce using rule 43 (cr -> T cr .)
+    H2              reduce using rule 43 (cr -> T cr .)
+    H3              reduce using rule 43 (cr -> T cr .)
+    HR              reduce using rule 43 (cr -> T cr .)
+    STAR            reduce using rule 43 (cr -> T cr .)
+    DOUBLESTAR      reduce using rule 43 (cr -> T cr .)
+    POINT           reduce using rule 43 (cr -> T cr .)
+    LEMI            reduce using rule 43 (cr -> T cr .)
+    LEST            reduce using rule 43 (cr -> T cr .)
+    RIST            reduce using rule 43 (cr -> T cr .)
+    LI              reduce using rule 43 (cr -> T cr .)
+    NLI             reduce using rule 43 (cr -> T cr .)
+    TEXT            reduce using rule 43 (cr -> T cr .)
+    SELI            reduce using rule 43 (cr -> T cr .)
+    TRLI            reduce using rule 43 (cr -> T cr .)
+    $end            reduce using rule 43 (cr -> T cr .)
+    T               reduce using rule 43 (cr -> T cr .)
+    CR              shift and go to state 63
+
+  ! CR              [ reduce using rule 43 (cr -> T cr .) ]
+
+
+state 65
+
+    (17) factor -> DOUBLESTAR factor DOUBLESTAR .
+
+    RIMI            reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    CR              reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    T               reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    STAR            reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    DOUBLESTAR      reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    POINT           reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    LEMI            reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    LEST            reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    TEXT            reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    H1              reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    H2              reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    H3              reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    HR              reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    RIST            reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    LI              reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    NLI             reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    SELI            reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    TRLI            reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    $end            reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+    RISM            reduce using rule 17 (factor -> DOUBLESTAR factor DOUBLESTAR .)
+
+
+state 66
+
+    (31) li -> LI factor cr .
+    (44) cr -> cr . CR
+
+    LI              reduce using rule 31 (li -> LI factor cr .)
+    SELI            reduce using rule 31 (li -> LI factor cr .)
+    TRLI            reduce using rule 31 (li -> LI factor cr .)
+    H1              reduce using rule 31 (li -> LI factor cr .)
+    H2              reduce using rule 31 (li -> LI factor cr .)
+    H3              reduce using rule 31 (li -> LI factor cr .)
+    HR              reduce using rule 31 (li -> LI factor cr .)
+    STAR            reduce using rule 31 (li -> LI factor cr .)
+    DOUBLESTAR      reduce using rule 31 (li -> LI factor cr .)
+    POINT           reduce using rule 31 (li -> LI factor cr .)
+    LEMI            reduce using rule 31 (li -> LI factor cr .)
+    LEST            reduce using rule 31 (li -> LI factor cr .)
+    RIST            reduce using rule 31 (li -> LI factor cr .)
+    NLI             reduce using rule 31 (li -> LI factor cr .)
+    TEXT            reduce using rule 31 (li -> LI factor cr .)
+    $end            reduce using rule 31 (li -> LI factor cr .)
+    CR              shift and go to state 63
+
+
+state 67
+
+    (37) trli -> TRLI factor cr .
+    (44) cr -> cr . CR
+
+    TRLI            reduce using rule 37 (trli -> TRLI factor cr .)
+    SELI            reduce using rule 37 (trli -> TRLI factor cr .)
+    LI              reduce using rule 37 (trli -> TRLI factor cr .)
+    H1              reduce using rule 37 (trli -> TRLI factor cr .)
+    H2              reduce using rule 37 (trli -> TRLI factor cr .)
+    H3              reduce using rule 37 (trli -> TRLI factor cr .)
+    HR              reduce using rule 37 (trli -> TRLI factor cr .)
+    STAR            reduce using rule 37 (trli -> TRLI factor cr .)
+    DOUBLESTAR      reduce using rule 37 (trli -> TRLI factor cr .)
+    POINT           reduce using rule 37 (trli -> TRLI factor cr .)
+    LEMI            reduce using rule 37 (trli -> TRLI factor cr .)
+    LEST            reduce using rule 37 (trli -> TRLI factor cr .)
+    RIST            reduce using rule 37 (trli -> TRLI factor cr .)
+    NLI             reduce using rule 37 (trli -> TRLI factor cr .)
+    TEXT            reduce using rule 37 (trli -> TRLI factor cr .)
+    $end            reduce using rule 37 (trli -> TRLI factor cr .)
+    CR              shift and go to state 63
+
+
+state 68
+
+    (18) factor -> POINT factor POINT .
+
+    RIMI            reduce using rule 18 (factor -> POINT factor POINT .)
+    CR              reduce using rule 18 (factor -> POINT factor POINT .)
+    T               reduce using rule 18 (factor -> POINT factor POINT .)
+    STAR            reduce using rule 18 (factor -> POINT factor POINT .)
+    DOUBLESTAR      reduce using rule 18 (factor -> POINT factor POINT .)
+    POINT           reduce using rule 18 (factor -> POINT factor POINT .)
+    LEMI            reduce using rule 18 (factor -> POINT factor POINT .)
+    LEST            reduce using rule 18 (factor -> POINT factor POINT .)
+    TEXT            reduce using rule 18 (factor -> POINT factor POINT .)
+    H1              reduce using rule 18 (factor -> POINT factor POINT .)
+    H2              reduce using rule 18 (factor -> POINT factor POINT .)
+    H3              reduce using rule 18 (factor -> POINT factor POINT .)
+    HR              reduce using rule 18 (factor -> POINT factor POINT .)
+    RIST            reduce using rule 18 (factor -> POINT factor POINT .)
+    LI              reduce using rule 18 (factor -> POINT factor POINT .)
+    NLI             reduce using rule 18 (factor -> POINT factor POINT .)
+    SELI            reduce using rule 18 (factor -> POINT factor POINT .)
+    TRLI            reduce using rule 18 (factor -> POINT factor POINT .)
+    $end            reduce using rule 18 (factor -> POINT factor POINT .)
+    RISM            reduce using rule 18 (factor -> POINT factor POINT .)
+
+
+state 69
+
+    (40) nli -> NLI factor cr .
+    (44) cr -> cr . CR
+
+    NLI             reduce using rule 40 (nli -> NLI factor cr .)
+    SELI            reduce using rule 40 (nli -> NLI factor cr .)
+    TRLI            reduce using rule 40 (nli -> NLI factor cr .)
+    H1              reduce using rule 40 (nli -> NLI factor cr .)
+    H2              reduce using rule 40 (nli -> NLI factor cr .)
+    H3              reduce using rule 40 (nli -> NLI factor cr .)
+    HR              reduce using rule 40 (nli -> NLI factor cr .)
+    STAR            reduce using rule 40 (nli -> NLI factor cr .)
+    DOUBLESTAR      reduce using rule 40 (nli -> NLI factor cr .)
+    POINT           reduce using rule 40 (nli -> NLI factor cr .)
+    LEMI            reduce using rule 40 (nli -> NLI factor cr .)
+    LEST            reduce using rule 40 (nli -> NLI factor cr .)
+    RIST            reduce using rule 40 (nli -> NLI factor cr .)
+    LI              reduce using rule 40 (nli -> NLI factor cr .)
+    TEXT            reduce using rule 40 (nli -> NLI factor cr .)
+    $end            reduce using rule 40 (nli -> NLI factor cr .)
+    CR              shift and go to state 63
+
+
+state 70
+
+    (14) bline -> RIST lines cr .
+    (10) lines -> lines cr .
+    (44) cr -> cr . CR
+
+  ! reduce/reduce conflict for STAR resolved using rule 10 (lines -> lines cr .)
+  ! reduce/reduce conflict for DOUBLESTAR resolved using rule 10 (lines -> lines cr .)
+  ! reduce/reduce conflict for POINT resolved using rule 10 (lines -> lines cr .)
+  ! reduce/reduce conflict for LEMI resolved using rule 10 (lines -> lines cr .)
+  ! reduce/reduce conflict for LEST resolved using rule 10 (lines -> lines cr .)
+  ! reduce/reduce conflict for TEXT resolved using rule 10 (lines -> lines cr .)
+  ! shift/reduce conflict for CR resolved as shift
+    RIST            reduce using rule 14 (bline -> RIST lines cr .)
+    H1              reduce using rule 14 (bline -> RIST lines cr .)
+    H2              reduce using rule 14 (bline -> RIST lines cr .)
+    H3              reduce using rule 14 (bline -> RIST lines cr .)
+    HR              reduce using rule 14 (bline -> RIST lines cr .)
+    LI              reduce using rule 14 (bline -> RIST lines cr .)
+    NLI             reduce using rule 14 (bline -> RIST lines cr .)
+    SELI            reduce using rule 14 (bline -> RIST lines cr .)
+    TRLI            reduce using rule 14 (bline -> RIST lines cr .)
+    $end            reduce using rule 14 (bline -> RIST lines cr .)
+    T               reduce using rule 10 (lines -> lines cr .)
+    STAR            reduce using rule 10 (lines -> lines cr .)
+    DOUBLESTAR      reduce using rule 10 (lines -> lines cr .)
+    POINT           reduce using rule 10 (lines -> lines cr .)
+    LEMI            reduce using rule 10 (lines -> lines cr .)
+    LEST            reduce using rule 10 (lines -> lines cr .)
+    TEXT            reduce using rule 10 (lines -> lines cr .)
+    CR              shift and go to state 63
+
+  ! STAR            [ reduce using rule 14 (bline -> RIST lines cr .) ]
+  ! DOUBLESTAR      [ reduce using rule 14 (bline -> RIST lines cr .) ]
+  ! POINT           [ reduce using rule 14 (bline -> RIST lines cr .) ]
+  ! LEMI            [ reduce using rule 14 (bline -> RIST lines cr .) ]
+  ! LEST            [ reduce using rule 14 (bline -> RIST lines cr .) ]
+  ! TEXT            [ reduce using rule 14 (bline -> RIST lines cr .) ]
+  ! CR              [ reduce using rule 10 (lines -> lines cr .) ]
+
+
+state 71
+
+    (33) seli -> SELI factor cr .
+    (44) cr -> cr . CR
+
+    SELI            reduce using rule 33 (seli -> SELI factor cr .)
+    TRLI            reduce using rule 33 (seli -> SELI factor cr .)
+    NLI             reduce using rule 33 (seli -> SELI factor cr .)
+    H1              reduce using rule 33 (seli -> SELI factor cr .)
+    H2              reduce using rule 33 (seli -> SELI factor cr .)
+    H3              reduce using rule 33 (seli -> SELI factor cr .)
+    HR              reduce using rule 33 (seli -> SELI factor cr .)
+    STAR            reduce using rule 33 (seli -> SELI factor cr .)
+    DOUBLESTAR      reduce using rule 33 (seli -> SELI factor cr .)
+    POINT           reduce using rule 33 (seli -> SELI factor cr .)
+    LEMI            reduce using rule 33 (seli -> SELI factor cr .)
+    LEST            reduce using rule 33 (seli -> SELI factor cr .)
+    RIST            reduce using rule 33 (seli -> SELI factor cr .)
+    LI              reduce using rule 33 (seli -> SELI factor cr .)
+    TEXT            reduce using rule 33 (seli -> SELI factor cr .)
+    $end            reduce using rule 33 (seli -> SELI factor cr .)
+    CR              shift and go to state 63
+
+
+state 72
+
+    (5) expression -> H2 factor cr .
+    (44) cr -> cr . CR
+
+    H1              reduce using rule 5 (expression -> H2 factor cr .)
+    H2              reduce using rule 5 (expression -> H2 factor cr .)
+    H3              reduce using rule 5 (expression -> H2 factor cr .)
+    HR              reduce using rule 5 (expression -> H2 factor cr .)
+    STAR            reduce using rule 5 (expression -> H2 factor cr .)
+    DOUBLESTAR      reduce using rule 5 (expression -> H2 factor cr .)
+    POINT           reduce using rule 5 (expression -> H2 factor cr .)
+    LEMI            reduce using rule 5 (expression -> H2 factor cr .)
+    LEST            reduce using rule 5 (expression -> H2 factor cr .)
+    RIST            reduce using rule 5 (expression -> H2 factor cr .)
+    LI              reduce using rule 5 (expression -> H2 factor cr .)
+    NLI             reduce using rule 5 (expression -> H2 factor cr .)
+    TEXT            reduce using rule 5 (expression -> H2 factor cr .)
+    SELI            reduce using rule 5 (expression -> H2 factor cr .)
+    TRLI            reduce using rule 5 (expression -> H2 factor cr .)
+    $end            reduce using rule 5 (expression -> H2 factor cr .)
+    CR              shift and go to state 63
+
+
+state 73
+
+    (6) expression -> H3 factor cr .
+    (44) cr -> cr . CR
+
+    H1              reduce using rule 6 (expression -> H3 factor cr .)
+    H2              reduce using rule 6 (expression -> H3 factor cr .)
+    H3              reduce using rule 6 (expression -> H3 factor cr .)
+    HR              reduce using rule 6 (expression -> H3 factor cr .)
+    STAR            reduce using rule 6 (expression -> H3 factor cr .)
+    DOUBLESTAR      reduce using rule 6 (expression -> H3 factor cr .)
+    POINT           reduce using rule 6 (expression -> H3 factor cr .)
+    LEMI            reduce using rule 6 (expression -> H3 factor cr .)
+    LEST            reduce using rule 6 (expression -> H3 factor cr .)
+    RIST            reduce using rule 6 (expression -> H3 factor cr .)
+    LI              reduce using rule 6 (expression -> H3 factor cr .)
+    NLI             reduce using rule 6 (expression -> H3 factor cr .)
+    TEXT            reduce using rule 6 (expression -> H3 factor cr .)
+    SELI            reduce using rule 6 (expression -> H3 factor cr .)
+    TRLI            reduce using rule 6 (expression -> H3 factor cr .)
+    $end            reduce using rule 6 (expression -> H3 factor cr .)
+    CR              shift and go to state 63
+
+
+state 74
+
+    (4) expression -> H1 factor cr .
+    (44) cr -> cr . CR
+
+    H1              reduce using rule 4 (expression -> H1 factor cr .)
+    H2              reduce using rule 4 (expression -> H1 factor cr .)
+    H3              reduce using rule 4 (expression -> H1 factor cr .)
+    HR              reduce using rule 4 (expression -> H1 factor cr .)
+    STAR            reduce using rule 4 (expression -> H1 factor cr .)
+    DOUBLESTAR      reduce using rule 4 (expression -> H1 factor cr .)
+    POINT           reduce using rule 4 (expression -> H1 factor cr .)
+    LEMI            reduce using rule 4 (expression -> H1 factor cr .)
+    LEST            reduce using rule 4 (expression -> H1 factor cr .)
+    RIST            reduce using rule 4 (expression -> H1 factor cr .)
+    LI              reduce using rule 4 (expression -> H1 factor cr .)
+    NLI             reduce using rule 4 (expression -> H1 factor cr .)
+    TEXT            reduce using rule 4 (expression -> H1 factor cr .)
+    SELI            reduce using rule 4 (expression -> H1 factor cr .)
+    TRLI            reduce using rule 4 (expression -> H1 factor cr .)
+    $end            reduce using rule 4 (expression -> H1 factor cr .)
+    CR              shift and go to state 63
+
+
+state 75
+
+    (22) factor -> LEMI factor RIMI LESM . factor RISM
+    (15) factor -> . text
+    (16) factor -> . STAR factor STAR
+    (17) factor -> . DOUBLESTAR factor DOUBLESTAR
+    (18) factor -> . POINT factor POINT
+    (22) factor -> . LEMI factor RIMI LESM factor RISM
+    (23) factor -> . LEST factor RIST
+    (19) text -> . TEXT
+    (20) text -> . text NUMBER
+    (21) text -> . text TEXT
+
+    STAR            shift and go to state 3
+    DOUBLESTAR      shift and go to state 8
+    POINT           shift and go to state 12
+    LEMI            shift and go to state 4
+    LEST            shift and go to state 1
+    TEXT            shift and go to state 19
+
+    text                           shift and go to state 6
+    factor                         shift and go to state 76
+
+state 76
+
+    (22) factor -> LEMI factor RIMI LESM factor . RISM
+
+    RISM            shift and go to state 77
+
+
+state 77
+
+    (22) factor -> LEMI factor RIMI LESM factor RISM .
+
+    RIMI            reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    CR              reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    T               reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    STAR            reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    DOUBLESTAR      reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    POINT           reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    LEMI            reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    LEST            reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    TEXT            reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    H1              reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    H2              reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    H3              reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    HR              reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    RIST            reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    LI              reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    NLI             reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    SELI            reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    TRLI            reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    $end            reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
+    RISM            reduce using rule 22 (factor -> LEMI factor RIMI LESM factor RISM .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for TEXT in state 19 resolved as shift
-WARNING: shift/reduce conflict for STAR in state 19 resolved as shift
-WARNING: shift/reduce conflict for DOUBLESTAR in state 19 resolved as shift
-WARNING: shift/reduce conflict for CODE in state 19 resolved as shift
-WARNING: shift/reduce conflict for LEMI in state 19 resolved as shift
-WARNING: shift/reduce conflict for LEST in state 19 resolved as shift
-WARNING: shift/reduce conflict for NLI in state 33 resolved as shift
-WARNING: shift/reduce conflict for LI in state 39 resolved as shift
-WARNING: shift/reduce conflict for STAR in state 39 resolved as shift
+WARNING: shift/reduce conflict for TEXT in state 6 resolved as shift
+WARNING: shift/reduce conflict for SELI in state 13 resolved as shift
+WARNING: shift/reduce conflict for TRLI in state 13 resolved as shift
+WARNING: shift/reduce conflict for TRLI in state 20 resolved as shift
+WARNING: shift/reduce conflict for NLI in state 23 resolved as shift
+WARNING: shift/reduce conflict for SELI in state 23 resolved as shift
+WARNING: shift/reduce conflict for TRLI in state 23 resolved as shift
+WARNING: shift/reduce conflict for STAR in state 28 resolved as shift
+WARNING: shift/reduce conflict for DOUBLESTAR in state 28 resolved as shift
+WARNING: shift/reduce conflict for POINT in state 28 resolved as shift
+WARNING: shift/reduce conflict for LEMI in state 28 resolved as shift
+WARNING: shift/reduce conflict for LEST in state 28 resolved as shift
+WARNING: shift/reduce conflict for TEXT in state 28 resolved as shift
+WARNING: shift/reduce conflict for LI in state 29 resolved as shift
+WARNING: shift/reduce conflict for SELI in state 29 resolved as shift
+WARNING: shift/reduce conflict for TRLI in state 29 resolved as shift
+WARNING: shift/reduce conflict for RIST in state 31 resolved as shift
+WARNING: shift/reduce conflict for SELI in state 49 resolved as shift
+WARNING: shift/reduce conflict for TRLI in state 49 resolved as shift
+WARNING: shift/reduce conflict for CR in state 56 resolved as shift
+WARNING: shift/reduce conflict for SELI in state 57 resolved as shift
+WARNING: shift/reduce conflict for TRLI in state 57 resolved as shift
+WARNING: shift/reduce conflict for CR in state 64 resolved as shift
+WARNING: shift/reduce conflict for CR in state 70 resolved as shift
+WARNING: reduce/reduce conflict in state 13 resolved using rule (li -> seul)
+WARNING: rejected rule (nli -> seul) in state 13
+WARNING: reduce/reduce conflict in state 70 resolved using rule (lines -> lines cr)
+WARNING: rejected rule (bline -> RIST lines cr) in state 70
