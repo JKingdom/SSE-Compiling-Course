@@ -3,7 +3,8 @@ from ply import *
 tokens = (
     'H1', 'H2', 'H3', 'CR', 'TEXT',  'DOUBLESTAR', 'HR', 'CODE',
     'LEMI', 'RIMI', 'LESM', 'RISM',
-    'LEST', 'RIST', 'LI', 'STAR', 'NLI'
+    'LEST', 'RIST', 'LI', 'STAR', 'NLI',
+    'code','rbrace', 'codeline',
     )
 
 # Tokens
@@ -26,7 +27,7 @@ t_NLI = r'(?m)^\d\.(?=\ +[^\*\-]+$)'
 
 
 def t_TEXT(t):
-    r'[^\d=\+\n\_\*\#\[\]\(\)<>-]+'
+    r'[^\d=\+\n\_\*\#\[\]\(\)<>-\`\{\}]+'
     t.value = str(t.value)
     return t
 
@@ -37,6 +38,57 @@ def t_CR(t):
     r'\n+[\t\n]*'
     t.lexer.lineno += t.value.count("\n")
     return t
+
+# Declare the state
+states = (
+  ('code','exclusive'),
+)
+
+# Match the first {. Enter code state.
+def t_code(t):
+    r'\`\`\`\n'
+    t.lexer.code_start = t.lexer.lexpos        # Record the starting position
+    t.lexer.level = 1                          # Initial brace level
+    t.lexer.begin('code')                     # Enter 'ccode' state
+    t.lexer.lineno += 1
+    return t
+
+# Rules for the code state
+#def t_code_lbrace(t):     
+#    r'\`\`\`\n'
+#    t.value = str(t.value)
+#    t.lexer.level +=1 
+#    t.lexer.lineno += 1
+#    return t             
+
+def t_code_rbrace(t):
+    r'\`\`\`\n'
+    t.value = str(t.value)
+    #t.lexer.lineno += t.value.count("\n")
+    t.lexer.lineno += 1
+    t.lexer.level -=1
+
+    # If closing brace, return the code fragment
+    # if t.lexer.level == 0:
+        #t.value = t.lexer.lexdata[t.lexer.code_start:t.lexer.lexpos+1]
+        # t.type = "code"
+        #t.lexer.lineno += t.value.count('\n')
+        #t.value = "```"
+    t.lexer.begin('INITIAL')           
+    return t
+    #else:
+    #    return t
+
+def t_code_codeline(t):
+    r'.*[^`\n]*\n'
+    t.value = str(t.value)
+    t.lexer.lineno += t.value.count("\n")
+    return t    
+
+def t_code_error(t):
+    t.lexer.skip(1)
+
+
 
 
 def t_error(t):
@@ -54,7 +106,7 @@ def mklex_run(filename):
         print tok
 
 if __name__ == '__main__':
-    filename = 'test01.md'
+    filename = 'test03.md'
     lexer.input(open(filename).read())
     while True:
         tok = lexer.token()

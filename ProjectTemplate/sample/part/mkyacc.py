@@ -37,6 +37,22 @@ def p_exp_cr(p):
     '''expression : lines'''
     p[0] = '<p>' + p[1] + '</p>'
 
+# code start
+def p_code_codeline(p):
+    '''expression : code
+    | expression codeline
+    '''
+    if(len(p) == 2):
+        p[0] = '<code>'+'<ol>'
+    else:
+        p[0] = p[1] + '<li>' + p[2]+'</li>' 
+
+def p_code_end(p):
+    "expression : expression rbrace"
+    p[0] = p[1] + '</ol>' + '</code>'
+
+#code end
+
 def p_lines_factor(p):
     '''lines : lines factor
         | lines CR
@@ -140,10 +156,11 @@ def p_nli(p):
 #    else:
 #        p[0] = p[1] + p[2] + p[3]
 
-def p_error(p):
-    if p:
-        print("error at '%s' line '%d'" % (p.value, p.lineno))
-    else:
-        print("error at EOF")
+# Declare the state
+states = (
+  ('code','exclusive'),
+)
+
+
         
 yacc.yacc(debug=1)
