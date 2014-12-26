@@ -120,6 +120,11 @@ def p_lrsm(p):
     p[0] = '<a href="' + str(p[5]) + '">' + str(p[2]) + '</a>'
 
 
+def p_img_lrsm(p):
+    '''factor : IMG ILEMI factor IRIMI ILESM factor IRISM'''
+    p[0] = '<img src="' + p[6] + '" alt="' + p[3] + '" title="" />'
+
+
 def p_lrst(p):
     '''factor : LEST factor RIST'''
     p[0] = '<a href="' + str(p[2]) + '">' + str(p[2]) + '</a>'

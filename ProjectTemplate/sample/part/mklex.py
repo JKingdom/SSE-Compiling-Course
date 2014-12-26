@@ -11,14 +11,17 @@ tokens = (
     'DOUBLESTAR',
     'HR',
     'POINT',
-    'LEMI','RIMI',
-    'LESM','RISM',
+    'LEMI', 'RIMI',
+    'LESM', 'RISM',
     'LEST', 'RIST',
     'LI', 'SELI', 'TRLI',
     'STAR',
     'NLI', 'SENLI', 'TRNLI',
     'NUMBER',
-    'T', 'code','rbrace', 'codeline',
+    'T', 'code', 'rbrace', 'codeline',
+    'IMG',
+    'ILEMI', 'IRIMI',
+    'ILESM', 'IRISM',
     )
 
 # Tokens
@@ -41,11 +44,11 @@ t_RIST = r'>'
 t_NLI = r'(?m)^\d\.(?=\ +[^\*\-]+$)'
 t_SENLI = r'(?m)^\t\d\.(?=\ +[^\*\-]+$)'
 t_TRNLI = r'(?m)^\t{2}\d\.(?=\ +[^\*\-]+$)'
-t_NUMBER = r'\d+(?!\.\ )'
+t_ANY_NUMBER = r'\d+(?!\.\ )'
 t_T = r'\t(?![\*\d])'
 
-def t_TEXT(t):
-    r'[^\t\d=`\+\n\_\*\#\[\]\(\)<>-]+'
+def t_ANY_TEXT(t):
+    r'[^\t!\d=`\+\n\_\*\#\[\]\(\)<>-]+'
     t.value = str(t.value)
     return t
 
@@ -59,7 +62,8 @@ def t_CR(t):
 
 # Declare the state
 states = (
-  ('code','exclusive'),
+  ('code', 'exclusive'),
+  ('img', 'exclusive'),
 )
 
 # Match the first {. Enter code state.
@@ -105,6 +109,23 @@ def t_code_codeline(t):
 
 def t_code_error(t):
     t.lexer.skip(1)
+
+
+# IMG
+
+def t_IMG(t):
+    r'\!(?=\[.+?\]\(.+?\))'
+    t.lexer.begin('img')                     # Enter 'img' state
+    return t
+
+
+t_img_ILEMI = r'\[(?=.*\]\(.*\))'
+t_img_IRIMI = r'\](?=\(.*\))'
+t_img_ILESM = r'\((?=.*\))'
+def t_img_IRISM(t):
+    r'\)'
+    t.lexer.begin('INITIAL')
+    return t
 
 
 
